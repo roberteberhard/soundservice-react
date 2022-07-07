@@ -180,22 +180,6 @@ const GlobalStyle = createGlobalStyle`
     outline: 2px dashed var(--secondary);
     outline-offset: 3px;
   }
-  /* Scrollbar Styles */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--body-scroll) var(--body);
-  }
-  body::-webkit-scrollbar {
-    width: 12px;
-  }
-  body::-webkit-scrollbar-track {
-    background: var(--body);
-  }
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--body-scroll);
-    border: 3px solid var(--body);
-    border-radius: 10px;
-  }
   #root {
     display: grid;
     grid-template-rows: 1fr auto;

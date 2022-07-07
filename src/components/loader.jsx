@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 // styles
 const StyledLoader = styled.div`
-  display: flex;
+  display: none;
 `
 
 // markup

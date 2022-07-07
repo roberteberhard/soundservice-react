@@ -25,22 +25,25 @@ const variables = css`
     --font-sans: 'MuseoRounded', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
     --font-mono: Courier, 'Courier New', 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
 
-    --fz-xxs: 12px;
-    --fz-xs: 13px;
-    --fz-sm: 14px;
-    --fz-md: 16px;
-    --fz-lg: 18px;
-    --fz-xl: 20px;
-    --fz-xxl: 22px;
-    --fz-heading: 28px;
+    --fz-xxs                    : 12px;
+    --fz-xs                     : 13px;
+    --fz-sm                     : 14px;
+    --fz-md                     : 16px;
+    --fz-lg                     : 18px;
+    --fz-xl                     : 20px;
+    --fz-xxl                    : 22px;
+    --fz-heading                : 28px;
 
-    --pad-xxl: 100px;
-    --pad-xl: 70px;
-    --pad-lg: 50px;
-    --pad-md: 40px;
-    --pad-sm: 25px;
+    --pad-xxl                   : 100px;
+    --pad-xl                    : 70px;
+    --pad-lg                    : 50px;
+    --pad-md                    : 40px;
+    --pad-sm                    : 25px;
 
-    --border-radius: 4px;
+
+
+
+    --border-radius             : 4px;
 
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);

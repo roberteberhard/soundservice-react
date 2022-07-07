@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { IconSeparatorDown } from '../assets/icons'
 import { socials, email, year } from '../config'
 
 // styles
@@ -48,6 +49,7 @@ const StyledInnerSection = styled.div`
 const Footer = () => {
   return (
     <StyledFooterSection>
+      <IconSeparatorDown />
       <StyledFooterContent>
         <StyledInnerSection>
           <div className="footer-brand">

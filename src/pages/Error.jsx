@@ -5,7 +5,6 @@ import { Layout } from '../layout'
 // styles
 const StyledMainContainer = styled.main`
   display: grid;
-  border: 2px dotted coral;
 `
 
 // markup
