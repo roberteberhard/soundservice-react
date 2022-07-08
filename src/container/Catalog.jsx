@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Wave from '../assets/svgs/wave.svg'
+import axios from '../apis/playlists'
+import { Link } from 'react-router-dom'
+import { useAxios } from '../hooks'
 import { IconPlay } from '../assets/icons'
+import Wave from '../assets/svgs/wave.svg'
 
 // styles
 const StyledCatalogSection = styled.section`
@@ -17,36 +20,27 @@ const StyledCatalogSection = styled.section`
   background-size: cover;
   background-position: center top;
   background-color: transparent;
-  .row {
-    .catalog-article {
-      display: flex;
-      justify-content: center;
-      justify-content: flex-end;
-      .player-box {
-        margin-top: 200px;
-      }
-    }
-    .catalog-start {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 55%;
-      height: auto;
-      .start-now {
-        cursor: pointer;
-        display: block;
-        margin: 10px auto 0;
-        width: 78px;
-        height: 78px;
-        color: transparent;
-        font-size: 0;
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        background-size: 100% 100%;
-        appearance: none;
-        &.ready {
-          animation: uiFadeIn 500ms normal forwards;
-        }
+
+  .catalog-start {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 55%;
+    height: auto;
+    .start-now {
+      cursor: pointer;
+      display: block;
+      margin: 10px auto 0;
+      width: 78px;
+      height: 78px;
+      color: transparent;
+      font-size: 0;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: 100% 100%;
+      appearance: none;
+      &.ready {
+        animation: uiFadeIn 500ms normal forwards;
       }
     }
     @keyframes uiFadeIn {
@@ -68,17 +62,39 @@ const StyledCatalogSection = styled.section`
 
 // markup
 const Catalog = () => {
+  const [posts, error, loading, axiosFetch] = useAxios()
+  const [slug, setSlug] = useState('a')
+  const [track, setTrack] = useState('b')
+
+  const getData = () => {
+    axiosFetch({
+      axiosInstance: axios,
+      method: 'GET',
+      url: '/playlists'
+    })
+  }
+
+  useEffect(() => {
+    getData()
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    if (!loading && !error && posts?.length) {
+      const post = posts[Math.floor(Math.random() * posts.length)]
+      setSlug(post.slug)
+      setTrack(post.track)
+    }
+  }, [posts, error, loading])
+
   return (
     <StyledCatalogSection style={{ backgroundImage: `url(${Wave})` }}>
-      <div className="row">
-        <div className="catalog-article">
-          <div className="player-box"></div>
-        </div>
-        <div className="catalog-start">
+      <div className="catalog-start">
+        <Link to={`/playing/${slug}/${track}`}>
           <div className="start-now ready">
             <IconPlay />
           </div>
-        </div>
+        </Link>
       </div>
     </StyledCatalogSection>
   )

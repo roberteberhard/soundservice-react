@@ -16,10 +16,9 @@ const useAxios = configObj => {
         ...requestConfig,
         signal: ctrl.signal
       })
-      console.log(res)
+      //console.log(res)
       setResponse(res.data)
     } catch (err) {
-      console.log(err)
       setError(err.message)
     } finally {
       setLoading(false)

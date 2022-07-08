@@ -116,17 +116,17 @@ const StyledPlaylistCard = styled.article`
 const PlaylistCard = ({ ...post }) => {
   const genres = post.genre.slice(0, 3)
   const { slug } = useParams()
-  const { appPlaylistSlug } = useShop()
+  const { playlistSlug, appPlaylistSlug } = useShop()
 
   useEffect(() => {
-    appPlaylistSlug(slug)
+    if (slug) appPlaylistSlug(slug)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug])
 
   return (
-    <StyledPlaylistCard className={slug === post.slug ? 'active' : ''}>
+    <StyledPlaylistCard className={playlistSlug === post.slug ? 'active' : ''}>
       <Link to={`/playing/${post.slug}/${post.track}`}>
-        <div className="playlist-ctrl">{slug === post.slug ? <IconActive /> : <IconPlay />}</div>
+        <div className="playlist-ctrl">{playlistSlug === post.slug ? <IconActive /> : <IconPlay />}</div>
         <div className="playlist-tracks">
           <span className="tracks-amount">{post.tracks} tracks</span>
         </div>
