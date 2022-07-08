@@ -10,8 +10,13 @@ const StyledFooterSection = styled.footer`
   margin: 0;
   overflow: hidden;
   width: 100%;
-  height: auto;
+  height: 400px;
   background-color: var(--lightblack);
+  .separator {
+    width: 100%;
+    height: 60px;
+    background-color: var(--lightblack);
+  }
 `
 const StyledFooterContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);

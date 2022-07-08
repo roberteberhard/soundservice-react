@@ -2,45 +2,65 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
 import { PlaylistCard } from '../components'
+import { IconBeachbus } from '../assets/icons'
 import { useAxios } from '../hooks'
 
-// styles
-const StyledPlaylists = styled.section`
+const StyledPlaylistsSection = styled.section`
+  width: 100%;
+  height: auto;
+  background-color: var(--ghost);
+`
+const StyledPlaylistContent = styled.div`
+  padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
+  @media (max-width: 1080px) {
+    padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
+  }
+  @media (max-width: 768px) {
+    padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
+  }
+`
+
+const StyledPlaylistInner = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
-  background-color: var(--ghost);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+
   .playlist-header {
-    &.row {
-      height: 108px;
-      .playlist-header__icon {
-        position: absolute;
-        top: 0px;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 88px;
-        width: 88px;
-        font-size: 0;
-        color: transparent;
-        &::before {
-          width: 88px;
-          height: 88px;
-        }
-      }
-      .playlist-header__title {
-        color: var(--darkgrey);
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 1.35;
-        text-align: center;
-        padding-top: 74px;
-      }
+    width: 100%;
+    margin-bottom: 30px;
+    .playlist-icon {
+      height: 88px;
+      width: 100px;
+      margin: 0 auto;
+    }
+    .playlist-title {
+      color: var(--darkgrey);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 1.35;
+      text-align: center;
+      text-transform: uppercase;
     }
   }
-  .playlist-covers {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+
+  .playlist-articles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+
+    @media (max-width: 1080px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
   }
   button {
     padding: 12px;
@@ -64,27 +84,39 @@ const Playlists = () => {
     // eslint-disable-next-line
   }, [])
 
-  return (
-    <StyledPlaylists>
-      <header className="playlist-header row">
-        <div className="playlist-header__icon i-bus">Beach Bus</div>
-        <h3 className="playlist-header__title">Beach Summer Playlists</h3>
-      </header>
-      <div className="playlist-covers">
-        {loading && <p>Loading...</p>}
-        {!loading && error && <p className="errMsg">{error}</p>}
-        {!loading && !error && posts?.length && (
-          <>
-            {posts.map((post, i) => (
-              <PlaylistCard key={i} id={post.id} title={post.title} card={post.cover} alt={post.alt} />
-            ))}
-          </>
-        )}
-        {!loading && !error && !posts && <p>No posts to display</p>}
+  const PlaylistHeader = (
+    <header className="playlist-header">
+      <div className="playlist-icon">
+        <IconBeachbus />
       </div>
+      <h2 className="playlist-title">Beach Summer Playlists</h2>
+    </header>
+  )
+  const PlaylistCards = (
+    <div className="playlist-articles ">
+      {loading && <p>Loading...</p>}
+      {!loading && error && <p className="errMsg">{error}</p>}
+      {!loading && !error && posts?.length && (
+        <>
+          {posts.map((post, i) => (
+            <PlaylistCard key={i} id={post.id} user={post.user} slug={post.slug} track={post.track} tracks={post.tracks} card={post.cover} genre={post.genre} title={post.title} alt={post.alt} />
+          ))}
+        </>
+      )}
+      {!loading && !error && !posts && <p>No posts to display</p>}
+    </div>
+  )
 
-      <button onClick={getData}>Refetch</button>
-    </StyledPlaylists>
+  return (
+    <StyledPlaylistsSection>
+      <StyledPlaylistContent>
+        <StyledPlaylistInner>
+          {PlaylistHeader}
+          {PlaylistCards}
+          <button onClick={getData}>Refetch</button>
+        </StyledPlaylistInner>
+      </StyledPlaylistContent>
+    </StyledPlaylistsSection>
   )
 }
 
