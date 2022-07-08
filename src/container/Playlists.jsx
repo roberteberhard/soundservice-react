@@ -10,7 +10,7 @@ const StyledPlaylistsSection = styled.section`
   height: auto;
   background-color: var(--ghost);
 `
-const StyledPlaylistContent = styled.div`
+const StyledPlaylistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
   @media (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
@@ -20,7 +20,7 @@ const StyledPlaylistContent = styled.div`
   }
 `
 
-const StyledPlaylistInner = styled.div`
+const StyledPlaylistsInner = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -99,7 +99,7 @@ const Playlists = () => {
       {!loading && !error && posts?.length && (
         <>
           {posts.map((post, i) => (
-            <PlaylistCard key={i} id={post.id} user={post.user} slug={post.slug} track={post.track} tracks={post.tracks} card={post.cover} genre={post.genre} title={post.title} alt={post.alt} />
+            <PlaylistCard key={i} user={post.user} slug={post.slug} track={post.track} tracks={post.tracks} card={post.cover} genre={post.genre} title={post.title} alt={post.alt} />
           ))}
         </>
       )}
@@ -109,13 +109,13 @@ const Playlists = () => {
 
   return (
     <StyledPlaylistsSection>
-      <StyledPlaylistContent>
-        <StyledPlaylistInner>
+      <StyledPlaylistsContent>
+        <StyledPlaylistsInner>
           {PlaylistHeader}
           {PlaylistCards}
           <button onClick={getData}>Refetch</button>
-        </StyledPlaylistInner>
-      </StyledPlaylistContent>
+        </StyledPlaylistsInner>
+      </StyledPlaylistsContent>
     </StyledPlaylistsSection>
   )
 }

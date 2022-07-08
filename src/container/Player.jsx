@@ -20,7 +20,11 @@ const StyledPlayerSection = styled.div`
 
 // markup
 const Player = () => {
-  return <StyledPlayerSection>Player Section</StyledPlayerSection>
+  return (
+    <StyledPlayerSection>
+      <h1>Player Section</h1>
+    </StyledPlayerSection>
+  )
 }
 
 export default Player

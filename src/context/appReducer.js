@@ -1,23 +1,23 @@
 export const initialState = {
-  loaded: false,
-  mounted: false
+  playlistSlug: '',
+  trackSlug: ''
 }
 
 const shopReducer = (state, action) => {
   const { type, payload } = action
 
   switch (type) {
-    case 'APP_IS_LOADED':
-      //console.log('APP_IS_LOADED', payload)
+    case 'APP_PLAYLIST_SLUG':
+      console.log('APP_PLAYLIST_SLUG', payload)
       return {
         ...state,
-        loaded: payload.loaded
+        playlistSlug: payload.playlistSlug
       }
-    case 'APP_IS_MOUNTED':
-      //console.log('APP_IS_MOUNTED', payload)
+    case 'APP_TRACK_SLUG':
+      console.log('APP_TRACK_SLUG', payload)
       return {
         ...state,
-        mounted: payload.mounted
+        trackSlug: payload.trackSlug
       }
     default:
       throw new Error(`No case for type ${type} found in shopReducer.`)

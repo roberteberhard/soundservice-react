@@ -7,30 +7,30 @@ export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   /* Show content after the page preload animation */
-  const appPlaylistSlug = numPlaylistSlug => {
+  const appIsLoaded = isLoaded => {
     dispatch({
-      type: 'APP_PLAYLIST_SLUG',
+      type: 'APP_IS_LOADED',
       payload: {
-        playlistSlug: numPlaylistSlug
+        loaded: isLoaded
       }
     })
   }
 
   /* Stop animate navlinks by page routing  */
-  const appTrackSlug = numTrackSlug => {
+  const appIsMounted = isMounted => {
     dispatch({
-      type: 'APP_TRACK_SLUG',
+      type: 'APP_IS_MOUNTED',
       payload: {
-        trackSlug: numTrackSlug
+        mounted: isMounted
       }
     })
   }
 
   const value = {
-    playlistSlug: state.playlistSlug,
-    trackSlug: state.trackSlug,
-    appPlaylistSlug,
-    appTrackSlug
+    loaded: state.loaded,
+    mounted: state.mounted,
+    appIsLoaded,
+    appIsMounted
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { IconPlay, IconActive } from '../../assets/icons'
+import useShop from '../../context/AppContext'
 
 // styles
 const StyledPlaylistCard = styled.article`
@@ -113,25 +114,25 @@ const StyledPlaylistCard = styled.article`
 
 // markup
 const PlaylistCard = ({ ...post }) => {
-  const [playlistId, setPlaylistId] = useState(0)
   const genres = post.genre.slice(0, 3)
+  const { slug } = useParams()
+  const { appPlaylistSlug } = useShop()
 
   useEffect(() => {
-    setPlaylistId(886)
-  }, [])
+    appPlaylistSlug(slug)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug])
 
   return (
-    <StyledPlaylistCard className={playlistId === post.id ? 'active' : ''}>
-      <Link to={`/sound/${post.slug}/${post.track}`}>
-        <div className="playlist-ctrl">{playlistId === post.id ? <IconActive /> : <IconPlay />}</div>
+    <StyledPlaylistCard className={slug === post.slug ? 'active' : ''}>
+      <Link to={`/playing/${post.slug}/${post.track}`}>
+        <div className="playlist-ctrl">{slug === post.slug ? <IconActive /> : <IconPlay />}</div>
         <div className="playlist-tracks">
           <span className="tracks-amount">{post.tracks} tracks</span>
         </div>
         <div className="playlist--desc">
           <h2 className="playlist-title">{post.title}</h2>
-          <p className="playlist-by">
-            by {post.user} / {post.id}
-          </p>
+          <p className="playlist-by">by {post.user}</p>
           <div className="playlist-genre">
             {genres &&
               genres.map((genre, i) => (

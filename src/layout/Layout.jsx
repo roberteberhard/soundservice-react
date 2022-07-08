@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { GlobalStyle, theme } from '../styles'
 import { Header, Player, Footer } from '../container'
@@ -12,10 +12,16 @@ const StyledContent = styled.div`
 
 // markup
 const Layout = ({ children }) => {
+  const refTop = useRef(null)
+
+  useEffect(() => {
+    refTop.current.scrollIntoView()
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <StyledContent>
+      <StyledContent ref={refTop}>
         <Header />
         <div id="content">{children}</div>
         <Player />

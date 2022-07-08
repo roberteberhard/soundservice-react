@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Layout } from '../layout'
+import { Player, Videolists, Playlists } from '../container'
 
 // styles
 const StyledMainContainer = styled.main`
@@ -8,16 +9,16 @@ const StyledMainContainer = styled.main`
 `
 
 // markup
-const Sound = () => {
+const Playing = () => {
   return (
     <Layout>
       <StyledMainContainer>
-        <>
-          <h5>Sound</h5>
-        </>
+        <Player />
+        <Videolists />
+        <Playlists />
       </StyledMainContainer>
     </Layout>
   )
 }
 
-export default Sound
+export default Playing

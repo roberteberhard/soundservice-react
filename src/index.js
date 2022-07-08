@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 
-// routes & components
-import { Home, Sound, Privacy, Legal, Error } from './routes'
+// pages & routes
+import { Home, Playing, Privacy, Legal, Error } from './pages'
 
 const Index = () => {
   return (
@@ -12,9 +12,7 @@ const Index = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/sound" element={<Sound />}>
-            <Route path=":user" element={<Sound />} />
-          </Route>
+          <Route path="/playing/:slug/:track" element={<Playing />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="*" component={<Error />} />
