@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
-import { PlaylistCard } from '../components'
+import { PlaylistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
 import { IconBeachbus } from '../assets/icons'
 import { useAxios } from '../hooks'
 
@@ -51,7 +51,7 @@ const StyledPlaylistsInner = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
-
+    padding-bottom: 20px;
     @media (max-width: 1080px) {
       grid-template-columns: 1fr 1fr 1fr;
     }
@@ -61,9 +61,6 @@ const StyledPlaylistsInner = styled.div`
     @media (max-width: 480px) {
       grid-template-columns: 1fr;
     }
-  }
-  button {
-    padding: 12px;
   }
 `
 
@@ -92,19 +89,20 @@ const Playlists = () => {
       <h2 className="playlist-title">Beach Summer Playlists</h2>
     </header>
   )
+
   const PlaylistCards = (
-    <div className="playlist-articles ">
-      {loading && <p>Loading...</p>}
-      {!loading && error && <p className="errMsg">{error}</p>}
+    <>
+      {loading && <NetworkSpinner />}
+      {!loading && error && <NetworkError />}
       {!loading && !error && posts?.length && (
-        <>
+        <div className="playlist-articles ">
           {posts.map((post, i) => (
             <PlaylistCard key={i} user={post.user} slug={post.slug} track={post.track} tracks={post.tracks} card={post.cover} genre={post.genre} title={post.title} alt={post.alt} />
           ))}
-        </>
+        </div>
       )}
-      {!loading && !error && !posts && <p>No posts to display</p>}
-    </div>
+      {!loading && !error && !posts && <NetworkEmpty />}
+    </>
   )
 
   return (
@@ -113,7 +111,6 @@ const Playlists = () => {
         <StyledPlaylistsInner>
           {PlaylistHeader}
           {PlaylistCards}
-          <button onClick={getData}>Refetch</button>
         </StyledPlaylistsInner>
       </StyledPlaylistsContent>
     </StyledPlaylistsSection>

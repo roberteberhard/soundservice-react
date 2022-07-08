@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Layout } from '../layout'
+import { Policy } from '../container'
 
 // styles
 const StyledMainContainer = styled.main`
@@ -8,16 +9,14 @@ const StyledMainContainer = styled.main`
 `
 
 // markup
-const Privacy = () => {
+const Legal = () => {
   return (
     <Layout>
       <StyledMainContainer>
-        <>
-          <h5>Privacy</h5>
-        </>
+        <Policy />
       </StyledMainContainer>
     </Layout>
   )
 }
 
-export default Privacy
+export default Legal
