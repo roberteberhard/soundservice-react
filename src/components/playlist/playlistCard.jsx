@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Link, useParams } from 'react-router-dom'
-import { IconPlay, IconActive } from '../../assets/icons'
 import useShop from '../../context/AppContext'
+import { Link } from 'react-router-dom'
+import { IconPlay, IconActive } from '../../assets/icons'
 
 // styles
 const StyledPlaylistCard = styled.article`
@@ -115,19 +115,11 @@ const StyledPlaylistCard = styled.article`
 // markup
 const PlaylistCard = ({ ...post }) => {
   const genres = post.genre.slice(0, 3)
-  const { slug } = useParams()
-  const { playlistSlug, appPlaylistSlug, appNumberTracks } = useShop()
-
-  useEffect(() => {
-    if (slug) {
-      appPlaylistSlug(slug)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug])
+  const { playlistSlug } = useShop()
 
   return (
     <StyledPlaylistCard className={playlistSlug === post.slug ? 'active' : ''}>
-      <Link onClick={() => appNumberTracks(post.tracks)} to={`/track/${post.slug}/${post.track}`}>
+      <Link to={`/track/${post.slug}/${post.track}`}>
         <div className="playlist-ctrl">{playlistSlug === post.slug ? <IconActive /> : <IconPlay />}</div>
         <div className="playlist-tracks">
           <span className="tracks-amount">{post.tracks} tracks</span>

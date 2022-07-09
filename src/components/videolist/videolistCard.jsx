@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useShop from '../../context/AppContext'
+import { Link } from 'react-router-dom'
 import { IconPlay } from '../../assets/icons'
 
 // styles
@@ -137,30 +138,28 @@ const StyledVideolistCard = styled.div`
 `
 
 // markup
-const VideolistCard = ({ index, ...post }) => {
-  const { appVideoTrack } = useShop()
-
-  const handleTrackData = (index, artist, title) => {
-    appVideoTrack({ index, artist, title })
-  }
+const VideolistCard = ({ ...post }) => {
+  const { playlistSlug, playlistTrack } = useShop()
 
   return (
-    <StyledVideolistCard className="">
-      <div className="videocard-link" onClick={() => handleTrackData(index + 1, post.artist, post.title)}>
-        <div className="videocard-ctrl">
-          <IconPlay />
+    <StyledVideolistCard className={playlistTrack === post.track ? 'active' : ''}>
+      <Link to={`/track/${playlistSlug}/${post.track}`}>
+        <div className="videocard-link">
+          <div className="videocard-ctrl">
+            <IconPlay />
+          </div>
+          <div className="videocard-eqlizr">
+            <span className="bar bar-1"></span>
+            <span className="bar bar-2"></span>
+            <span className="bar bar-3"></span>
+          </div>
+          <div className="videocard-desc">
+            <h2 className="videocard-desc__title">{post.title}</h2>
+            <p className="videocard-desc__artist">{post.artist}</p>
+          </div>
+          <img src={post.thumb} width="100%" height="100%" alt={post.title} />
         </div>
-        <div className="videocard-eqlizr">
-          <span className="bar bar-1"></span>
-          <span className="bar bar-2"></span>
-          <span className="bar bar-3"></span>
-        </div>
-        <div className="videocard-desc">
-          <h2 className="videocard-desc__title">{post.title}</h2>
-          <p className="videocard-desc__artist">{post.artist}</p>
-        </div>
-        <img src={post.thumb} width="100%" height="100%" alt={post.title} />
-      </div>
+      </Link>
     </StyledVideolistCard>
   )
 }

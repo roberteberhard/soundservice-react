@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
 import useShop from '../context/AppContext'
@@ -81,10 +81,12 @@ const StyledVideolistsInner = styled.div`
 // markup
 const Videolists = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
-  const { playlistSlug, videoTrack, numberTracks } = useShop()
+  const [listIndex, setListIndex] = useState(0)
+  const [listTracks, setListTracks] = useState(0)
+  const [activeArtist, setActiveArtist] = useState('Artist')
+  const [activeTrack, setActiveTrack] = useState('Track')
+  const { playlistTrack } = useShop()
   const { slug } = useParams()
-
-  //
 
   const getData = () => {
     axiosFetch({
@@ -94,14 +96,38 @@ const Videolists = () => {
     })
   }
 
+  const getIndex = track => {
+    return posts.findIndex(obj => obj.track === track) + 1
+  }
+  const getArtist = track => {
+    let index = posts.findIndex(obj => obj.track === track)
+    return index >= 0 ? posts[index].artist : 'Artist'
+  }
+  const getTrack = track => {
+    let index = posts.findIndex(obj => obj.track === track)
+    return index >= 0 ? posts[index].title : 'Track'
+  }
+
   useEffect(() => {
     if (slug) getData()
     // eslint-disable-next-line
   }, [slug])
 
   useEffect(() => {
+    if (playlistTrack) {
+      setListIndex(getIndex(playlistTrack))
+      setActiveArtist(getArtist(playlistTrack))
+      setActiveTrack(getTrack(playlistTrack))
+    }
+    // eslint-disable-next-line
+  }, [playlistTrack])
+
+  useEffect(() => {
     if (!loading && !error && posts?.length) {
-      console.log(posts.length)
+      setListTracks(posts.length)
+      setListIndex(getIndex(playlistTrack))
+      setActiveArtist(getArtist(playlistTrack))
+      setActiveTrack(getTrack(playlistTrack))
     }
     // eslint-disable-next-line
   }, [posts, error, loading])
@@ -112,15 +138,15 @@ const Videolists = () => {
         <IconSose />
       </div>
       <div className="videolist-desc">
-        Track {videoTrack.index} of {numberTracks}
+        Track {listIndex} of {listTracks}
         <span className="videolist-desc__arrow">
           <IconArrow />
         </span>
-        {videoTrack.artist}
+        {activeArtist}
         <span className="videolist-desc__arrow">
           <IconArrow />
         </span>
-        {videoTrack.title} - ({playlistSlug})
+        {activeTrack}
       </div>
     </header>
   )
@@ -132,7 +158,7 @@ const Videolists = () => {
       {!loading && !error && posts?.length && (
         <div className="videolist-articles ">
           {posts.map((post, i) => (
-            <VideolistCard key={i} index={i} {...post} />
+            <VideolistCard key={i} {...post} />
           ))}
         </div>
       )}

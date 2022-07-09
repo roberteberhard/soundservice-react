@@ -134,7 +134,7 @@ const Playlists = () => {
           <IconArrow />
         </span>
         activePlaylist.title
-        <span class="track-desc__arrow">
+        <span className="track-desc__arrow">
           <IconArrow />
         </span>
         activePlaylist.tracks Tracks
