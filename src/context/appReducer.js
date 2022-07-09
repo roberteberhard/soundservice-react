@@ -1,10 +1,7 @@
 export const initialState = {
   playlistSlug: '',
   trackSlug: '',
-  startRandom: {
-    slug: '',
-    track: ''
-  }
+  pageHome: false
 }
 
 const shopReducer = (state, action) => {
@@ -23,11 +20,11 @@ const shopReducer = (state, action) => {
         ...state,
         trackSlug: payload.trackSlug
       }
-    case 'APP_START_RANDOM':
-      //console.log('APP_START_RANDOM', payload)
+    case 'APP_PAGE_HOME':
+      //console.log('APP_PAGE_HOME', payload)
       return {
         ...state,
-        startRandom: payload.startRandom
+        pageHome: payload.pageHome
       }
     default:
       throw new Error(`No case for type ${type} found in shopReducer.`)

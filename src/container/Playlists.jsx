@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
+import useShop from '../context/AppContext'
 import { PlaylistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
 import { IconBeachbus } from '../assets/icons'
 import { useAxios } from '../hooks'
@@ -8,7 +9,7 @@ import { useAxios } from '../hooks'
 const StyledPlaylistsSection = styled.section`
   width: 100%;
   height: auto;
-  background-color: var(--ghost);
+  background-color: ${props => (props.isHome ? '#f1f1f1' : '#282828')};
 `
 const StyledPlaylistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
@@ -67,6 +68,7 @@ const StyledPlaylistsInner = styled.div`
 // markup
 const Playlists = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
+  const { pageHome } = useShop()
 
   const getData = () => {
     axiosFetch({
@@ -106,10 +108,10 @@ const Playlists = () => {
   )
 
   return (
-    <StyledPlaylistsSection>
+    <StyledPlaylistsSection isHome={pageHome}>
       <StyledPlaylistsContent>
         <StyledPlaylistsInner>
-          {PlaylistHeader}
+          {pageHome && PlaylistHeader}
           {PlaylistCards}
         </StyledPlaylistsInner>
       </StyledPlaylistsContent>

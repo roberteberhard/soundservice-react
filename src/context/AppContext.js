@@ -26,12 +26,12 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /* Add a random 'slug' and 'track' valur for the Home play button  */
-  const appStartRandom = objStartRandom => {
+  /* Add home location if true  */
+  const appPageHome = isPageHome => {
     dispatch({
-      type: 'APP_START_RANDOM',
+      type: 'APP_PAGE_HOME',
       payload: {
-        startRandom: objStartRandom
+        pageHome: isPageHome
       }
     })
   }
@@ -39,10 +39,10 @@ export const AppProvider = ({ children }) => {
   const value = {
     playlistSlug: state.playlistSlug,
     trackSlug: state.trackSlug,
-    startRandom: state.startRandom,
+    pageHome: state.pageHome,
     appPlaylistSlug,
     appTrackSlug,
-    appStartRandom
+    appPageHome
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom'
 const StyledVideolistsSection = styled.section`
   width: 100%;
   min-height: 400px;
-  background-color: var(--lightblack);
+  margin-top: 100vh;
+  background-color: var(--jetblack);
 `
 const StyledVideolistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);

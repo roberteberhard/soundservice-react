@@ -7,7 +7,7 @@ const Styled404Section = styled.section`
 `
 
 // markup
-const error404 = () => {
+const Error404 = () => {
   return (
     <Styled404Section>
       <p>404 Section</p>
@@ -15,4 +15,4 @@ const error404 = () => {
   )
 }
 
-export default error404
+export default Error404

@@ -15,7 +15,7 @@ const StyledPlayerSection = styled.div`
   height: 40px;
   font-size: 14px;
   color: var(--white);
-  background-color: rgba(9, 9, 9, 0.2);
+  background-color: var(--black);
 `
 
 // markup
