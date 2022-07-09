@@ -10,7 +10,7 @@ const StyledNetworkSpinner = styled.div`
 const DarkSpinner = styled.div`
   position: absolute;
   z-index: 1;
-  top: 50px;
+  top: calc(50% - 5px);
   left: calc(50% - 5px);
   height: 26px;
   width: 26px;

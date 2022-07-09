@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import axios from '../apis/playlists'
 import { VideolistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
 import { useParams } from 'react-router-dom'
 import { useAxios } from '../hooks'
+
+import axios from '../apis/playlists'
 
 const StyledVideolistsSection = styled.section`
   width: 100%;
@@ -27,22 +28,6 @@ const StyledVideolistsInner = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
-  .videolist-articles {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    padding-bottom: 20px;
-    @media (max-width: 1080px) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 480px) {
-      grid-template-columns: 1fr;
-    }
-  }
 `
 
 // markup
@@ -59,9 +44,9 @@ const Videolists = () => {
   }
 
   useEffect(() => {
-    if (slug) getData()
+    getData()
     // eslint-disable-next-line
-  }, [slug])
+  }, [])
 
   const VideolistHeader = (
     <header className="videolist-header">
@@ -79,7 +64,7 @@ const Videolists = () => {
       {!loading && !error && posts?.length && (
         <div className="videolist-articles ">
           {posts.map((post, i) => (
-            <VideolistCard key={i} {...post} />
+            <VideolistCard key={i} user={post.user} slug={post.slug} track={post.track} tracks={post.tracks} card={post.cover} genre={post.genre} title={post.title} alt={post.alt} />
           ))}
         </div>
       )}
@@ -91,8 +76,8 @@ const Videolists = () => {
     <StyledVideolistsSection>
       <StyledVideolistsContent>
         <StyledVideolistsInner>
-          {VideolistHeader}
-          {VideolistCards}
+          <VideolistHeader />
+          <VideolistCards />
         </StyledVideolistsInner>
       </StyledVideolistsContent>
     </StyledVideolistsSection>

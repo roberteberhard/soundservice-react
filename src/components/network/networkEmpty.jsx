@@ -6,9 +6,9 @@ const StyledNetworkEmpty = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 50vh;
-  padding-top: 50px;
   .empty-description {
     max-width: 480px;
     font-family: var(--font-mono);
@@ -21,7 +21,7 @@ const StyledNetworkEmpty = styled.div`
 const NetworkEmpty = () => {
   return (
     <StyledNetworkEmpty>
-      <p class="empty-description">No Playlists to display!</p>
+      <p className="empty-description">No Playlists to display!</p>
     </StyledNetworkEmpty>
   )
 }

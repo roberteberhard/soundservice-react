@@ -35,9 +35,9 @@ const StyledPlaylistCard = styled.article`
     position: absolute;
     width: 100%;
     height: 100%;
+    transition: var(--transition);
     border: 2px solid var(--primary);
     background-color: rgba(0, 0, 0, 0.32);
-    transition: var(--transition);
     svg.icon-play {
       position: absolute;
       top: 50%;

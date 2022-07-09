@@ -6,9 +6,9 @@ const StyledNetworkError = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 50vh;
-  padding-top: 30px;
   .error-heading {
     max-width: 480px;
     font-family: var(--font-sans);
@@ -28,8 +28,8 @@ const StyledNetworkError = styled.div`
 const NetworkError = () => {
   return (
     <StyledNetworkError>
-      <p class="error-heading">Network Error!</p>
-      <p class="error-description">Sorry, a network error occurred while establishing a connection to the server. Please press the browser's reload button.</p>
+      <p className="error-heading">Network Error!</p>
+      <p className="error-description">Sorry, a network error occurred while establishing a connection to the server. Please press the browser's reload button.</p>
     </StyledNetworkError>
   )
 }

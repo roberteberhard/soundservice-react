@@ -9,7 +9,7 @@ const StyledPlayerSection = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 2;
-  top: 600px;
+  top: 30px;
   right: 140px;
   width: 120px;
   height: 40px;
