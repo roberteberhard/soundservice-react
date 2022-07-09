@@ -26,16 +26,6 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /* Add the playlist track amounts to the state */
-  const appNumberTracks = numNumberTracks => {
-    dispatch({
-      type: 'APP_NUMBER_TRACKS',
-      payload: {
-        numberTracks: numNumberTracks
-      }
-    })
-  }
-
   /* Add home location if true  */
   const appPageHome = isPageHome => {
     dispatch({
@@ -46,27 +36,13 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /*   */
-  const appVideoTrack = objVideoTrack => {
-    dispatch({
-      type: 'APP_VIDEO_TRACK',
-      payload: {
-        videoTrack: objVideoTrack
-      }
-    })
-  }
-
   const value = {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
-    numberTracks: state.numberTracks,
     pageHome: state.pageHome,
-    videoTrack: state.videoTrack,
     appPlaylistSlug,
     appPlaylistTrack,
-    appNumberTracks,
-    appPageHome,
-    appVideoTrack
+    appPageHome
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

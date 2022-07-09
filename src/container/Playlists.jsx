@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
 import useShop from '../context/AppContext'
@@ -99,7 +99,10 @@ const StyledPlaylistsInner = styled.div`
 // markup
 const Playlists = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
-  const { pageHome } = useShop()
+  const [activeUser, setActiveUser] = useState('User')
+  const [activeTitle, setActiveTitle] = useState('Title')
+  const [activeTracks, setActiveTracks] = useState(0)
+  const { pageHome, playlistSlug } = useShop()
 
   const getData = () => {
     axiosFetch({
@@ -109,10 +112,38 @@ const Playlists = () => {
     })
   }
 
+  const getUser = slug => {
+    let index = posts.findIndex(obj => obj.slug === slug)
+    return index >= 0 ? posts[index].user : 'User'
+  }
+  const getTitle = slug => {
+    let index = posts.findIndex(obj => obj.slug === slug)
+    return index >= 0 ? posts[index].title : 'Title'
+  }
+  const getTracks = slug => {
+    let index = posts.findIndex(obj => obj.slug === slug)
+    return index >= 0 ? posts[index].tracks : 'Title'
+  }
+
   useEffect(() => {
     getData()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    setActiveTitle(getTitle(playlistSlug))
+    setActiveTracks(getTracks(playlistSlug))
+    // eslint-disable-next-line
+  }, [playlistSlug])
+
+  useEffect(() => {
+    if (!loading && !error && posts?.length) {
+      setActiveUser(getUser(playlistSlug))
+      setActiveTitle(getTitle(playlistSlug))
+      setActiveTracks(getTracks(playlistSlug))
+    }
+    // eslint-disable-next-line
+  }, [posts, error, loading])
 
   const HomeHeader = (
     <header className="playlist-header">
@@ -129,15 +160,15 @@ const Playlists = () => {
         <IconSose />
       </div>
       <div className="track-desc">
-        playlis.user
+        {activeUser}
         <span className="track-desc__arrow">
           <IconArrow />
         </span>
-        activePlaylist.title
+        {activeTitle}
         <span className="track-desc__arrow">
           <IconArrow />
         </span>
-        activePlaylist.tracks Tracks
+        {activeTracks} Tracks
       </div>
     </header>
   )
