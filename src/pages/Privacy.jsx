@@ -6,6 +6,7 @@ import { Policy } from '../container'
 // styles
 const StyledMainContainer = styled.main`
   display: grid;
+  background-color: var(--lightblack);
 `
 
 // markup

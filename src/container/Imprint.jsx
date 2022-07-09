@@ -3,10 +3,6 @@ import styled from 'styled-components'
 
 // styles
 const StyledImprintSection = styled.section`
-  display: grid;
-`
-
-const StyledImprintContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
   @media (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
@@ -116,9 +112,7 @@ const Impressum = () => {
 
   return (
     <StyledImprintSection>
-      <StyledImprintContent>
-        <StyledImprintInner>{data}</StyledImprintInner>
-      </StyledImprintContent>
+      <StyledImprintInner>{data}</StyledImprintInner>
     </StyledImprintSection>
   )
 }

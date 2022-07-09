@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import useShop from '../context/AppContext'
 import { Link } from 'react-router-dom'
 import { IconSeparatorDown } from '../assets/icons'
 import { socials, email, year } from '../config'
@@ -11,11 +12,11 @@ const StyledFooterSection = styled.footer`
   overflow: hidden;
   width: 100%;
   height: 400px;
-  background-color: var(--lightblack);
+  background-color: var(--jetblack);
   .separator {
     width: 100%;
     height: 60px;
-    background-color: var(--lightblack);
+    background-color: var(--jetblack);
   }
 `
 const StyledFooterContent = styled.div`
@@ -52,9 +53,11 @@ const StyledInnerSection = styled.div`
 
 // markup
 const Footer = () => {
+  const { pageHome } = useShop()
+
   return (
     <StyledFooterSection>
-      <IconSeparatorDown />
+      <IconSeparatorDown isHome={pageHome} />
       <StyledFooterContent>
         <StyledInnerSection>
           <div className="footer-brand">
@@ -91,7 +94,6 @@ const Footer = () => {
               </ul>
             </div>
           </nav>
-
           <nav className="footer-legal">
             <div className="footer-privacy">
               <ul>

@@ -41,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--lightblack);
+    background-color: var(--jetblack);
     @media (max-width: 480px) {
       font-size: var(--fz-sm);
     }

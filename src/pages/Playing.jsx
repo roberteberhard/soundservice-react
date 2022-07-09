@@ -7,7 +7,6 @@ import { Player, Videolists, Playlists } from '../container'
 const StyledMainContainer = styled.main`
   display: grid;
 `
-
 // markup
 const Playing = () => {
   return (

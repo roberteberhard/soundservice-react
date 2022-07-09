@@ -1,7 +1,14 @@
 export const initialState = {
   playlistSlug: '',
   trackSlug: '',
-  pageHome: false
+  numberTracks: 0,
+  pageHome: false,
+  videoTrack: {
+    id: 0,
+    index: 0,
+    artist: '',
+    title: ''
+  }
 }
 
 const shopReducer = (state, action) => {
@@ -20,11 +27,23 @@ const shopReducer = (state, action) => {
         ...state,
         trackSlug: payload.trackSlug
       }
+    case 'APP_NUMBER_TRACKS':
+      //console.log('APP_NUMBER_TRACKS', payload)
+      return {
+        ...state,
+        numberTracks: payload.numberTracks
+      }
     case 'APP_PAGE_HOME':
       //console.log('APP_PAGE_HOME', payload)
       return {
         ...state,
         pageHome: payload.pageHome
+      }
+    case 'APP_VIDEO_TRACK':
+      //console.log('APP_VIDEO_TRACK', payload)
+      return {
+        ...state,
+        videoTrack: payload.videoTrack
       }
     default:
       throw new Error(`No case for type ${type} found in shopReducer.`)

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
+import useShop from '../context/AppContext'
 import { VideolistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
 import { useParams } from 'react-router-dom'
 import { useAxios } from '../hooks'
+import { IconArrow, IconSose } from '../assets/icons'
 
 const StyledVideolistsSection = styled.section`
   width: 100%;
@@ -27,6 +29,37 @@ const StyledVideolistsInner = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
+  .videolist-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 0 20px;
+    .videolist-icon {
+      width: 12px;
+      height: 18px;
+    }
+    .videolist-desc {
+      margin-left: 10px;
+      color: var(--ghost);
+      color: #ccc;
+      font-family: var(--font-mono);
+      font-size: var(--fz-sm);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1;
+      &__arrow {
+        display: inline-block;
+        position: relative;
+        top: -1px;
+        width: 7px;
+        margin: 0 10px;
+      }
+    }
+  }
+
   .videolist-articles {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -48,7 +81,10 @@ const StyledVideolistsInner = styled.div`
 // markup
 const Videolists = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
+  const { playlistSlug, videoTrack, numberTracks } = useShop()
   const { slug } = useParams()
+
+  //
 
   const getData = () => {
     axiosFetch({
@@ -63,12 +99,29 @@ const Videolists = () => {
     // eslint-disable-next-line
   }, [slug])
 
+  useEffect(() => {
+    if (!loading && !error && posts?.length) {
+      console.log(posts.length)
+    }
+    // eslint-disable-next-line
+  }, [posts, error, loading])
+
   const VideolistHeader = (
     <header className="videolist-header">
-      <div className="videolist-icon">icon</div>
-      <h3 className="videolist-desc">
-        Track xxxx of xxx <span className="title--arrow"> • </span>xxx<span className="title--arrow"> • </span>xxxx
-      </h3>
+      <div className="videolist-icon">
+        <IconSose />
+      </div>
+      <div className="videolist-desc">
+        Track {videoTrack.index} of {numberTracks}
+        <span className="videolist-desc__arrow">
+          <IconArrow />
+        </span>
+        {videoTrack.artist}
+        <span className="videolist-desc__arrow">
+          <IconArrow />
+        </span>
+        {videoTrack.title} - ({playlistSlug})
+      </div>
     </header>
   )
 
@@ -79,7 +132,7 @@ const Videolists = () => {
       {!loading && !error && posts?.length && (
         <div className="videolist-articles ">
           {posts.map((post, i) => (
-            <VideolistCard key={i} {...post} />
+            <VideolistCard key={i} index={i} {...post} />
           ))}
         </div>
       )}

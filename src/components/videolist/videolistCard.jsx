@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import useShop from '../../context/AppContext'
 import { IconPlay } from '../../assets/icons'
 
 // styles
@@ -7,7 +8,7 @@ const StyledVideolistCard = styled.div`
   display: block;
   position: relative;
   overflow: hidden;
-  background-color: var(--white);
+  background-color: var(--black);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
   &.active {
     .videocard-link {
@@ -136,14 +137,16 @@ const StyledVideolistCard = styled.div`
 `
 
 // markup
-const VideolistCard = ({ ...post }) => {
-  const handleActiveVideoCard = () => {
-    console.log('hello')
+const VideolistCard = ({ index, ...post }) => {
+  const { appVideoTrack } = useShop()
+
+  const handleTrackData = (index, artist, title) => {
+    appVideoTrack({ index, artist, title })
   }
 
   return (
     <StyledVideolistCard className="">
-      <div className="videocard-link" onClick={handleActiveVideoCard}>
+      <div className="videocard-link" onClick={() => handleTrackData(index + 1, post.artist, post.title)}>
         <div className="videocard-ctrl">
           <IconPlay />
         </div>

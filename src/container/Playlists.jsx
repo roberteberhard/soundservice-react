@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import axios from '../apis/playlists'
 import useShop from '../context/AppContext'
 import { PlaylistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
-import { IconBeachbus } from '../assets/icons'
+import { IconBeachbus, IconSose, IconArrow } from '../assets/icons'
 import { useAxios } from '../hooks'
 
 const StyledPlaylistsSection = styled.section`
@@ -27,7 +27,7 @@ const StyledPlaylistsInner = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
-
+  /* Home */
   .playlist-header {
     width: 100%;
     margin-bottom: 30px;
@@ -46,7 +46,38 @@ const StyledPlaylistsInner = styled.div`
       text-transform: uppercase;
     }
   }
-
+  /* Track */
+  .track-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 0 20px;
+    .track-icon {
+      width: 12px;
+      height: 18px;
+    }
+    .track-desc {
+      margin-left: 10px;
+      color: var(--ghost);
+      color: #ccc;
+      font-family: var(--font-mono);
+      font-size: var(--fz-sm);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1;
+      &__arrow {
+        display: inline-block;
+        position: relative;
+        top: -1px;
+        width: 7px;
+        margin: 0 10px;
+      }
+    }
+  }
+  /* Articles */
   .playlist-articles {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -83,12 +114,31 @@ const Playlists = () => {
     // eslint-disable-next-line
   }, [])
 
-  const PlaylistHeader = (
+  const HomeHeader = (
     <header className="playlist-header">
       <div className="playlist-icon">
         <IconBeachbus />
       </div>
       <h2 className="playlist-title">Beach Summer Playlists</h2>
+    </header>
+  )
+
+  const TrackHeader = (
+    <header className="track-header">
+      <div className="track-icon">
+        <IconSose />
+      </div>
+      <div className="track-desc">
+        playlis.user
+        <span className="track-desc__arrow">
+          <IconArrow />
+        </span>
+        activePlaylist.title
+        <span class="track-desc__arrow">
+          <IconArrow />
+        </span>
+        activePlaylist.tracks Tracks
+      </div>
     </header>
   )
 
@@ -111,7 +161,7 @@ const Playlists = () => {
     <StyledPlaylistsSection isHome={pageHome}>
       <StyledPlaylistsContent>
         <StyledPlaylistsInner>
-          {pageHome && PlaylistHeader}
+          {pageHome && pageHome ? HomeHeader : TrackHeader}
           {PlaylistCards}
         </StyledPlaylistsInner>
       </StyledPlaylistsContent>
