@@ -8,7 +8,7 @@ const StyledMainContainer = styled.main`
   display: grid;
 `
 // markup
-const Playing = () => {
+const Track = () => {
   return (
     <Layout>
       <StyledMainContainer>
@@ -20,4 +20,4 @@ const Playing = () => {
   )
 }
 
-export default Playing
+export default Track

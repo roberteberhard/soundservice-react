@@ -90,7 +90,7 @@ const Catalog = () => {
   return (
     <StyledCatalogSection style={{ backgroundImage: `url(${Wave})` }}>
       <div className="catalog-start">
-        <Link to={`/playing/${slug}/${track}`}>
+        <Link to={`/track/${slug}/${track}`}>
           <div className="start-now ready">
             <IconPlay />
           </div>

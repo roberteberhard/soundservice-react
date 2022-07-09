@@ -127,7 +127,7 @@ const PlaylistCard = ({ ...post }) => {
 
   return (
     <StyledPlaylistCard className={playlistSlug === post.slug ? 'active' : ''}>
-      <Link onClick={() => appNumberTracks(post.tracks)} to={`/playing/${post.slug}/${post.track}`}>
+      <Link onClick={() => appNumberTracks(post.tracks)} to={`/track/${post.slug}/${post.track}`}>
         <div className="playlist-ctrl">{playlistSlug === post.slug ? <IconActive /> : <IconPlay />}</div>
         <div className="playlist-tracks">
           <span className="tracks-amount">{post.tracks} tracks</span>

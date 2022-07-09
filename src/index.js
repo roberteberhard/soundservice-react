@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 
 // pages & routes
-import { Home, Playing, Privacy, Legal, Error } from './pages'
+import { Home, Track, Privacy, Legal, Error } from './pages'
 
 const Index = () => {
   return (
@@ -12,7 +12,7 @@ const Index = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/playing/:slug/:track" element={<Playing />} />
+          <Route path="/track/:slug/:track" element={<Track />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="*" component={<Error />} />
