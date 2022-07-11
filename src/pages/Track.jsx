@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useShop from '../context/AppContext'
 import { useParams } from 'react-router-dom'
 import { Layout } from '../layout'
-import { Player, Videolists, Playlists } from '../container'
+import { Videolists, Playlists } from '../container'
 
 // styles
 const StyledMainContainer = styled.main`
@@ -12,7 +12,12 @@ const StyledMainContainer = styled.main`
 // markup
 const Track = () => {
   const { slug, track } = useParams()
-  const { appPlaylistSlug, appPlaylistTrack } = useShop()
+  const { appPageView, appPlaylistSlug, appPlaylistTrack } = useShop()
+
+  useEffect(() => {
+    appPageView('track')
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     if (track) {
@@ -25,7 +30,6 @@ const Track = () => {
   return (
     <Layout>
       <StyledMainContainer>
-        <Player />
         <Videolists />
         <Playlists />
       </StyledMainContainer>

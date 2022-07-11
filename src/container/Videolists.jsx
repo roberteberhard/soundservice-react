@@ -7,11 +7,10 @@ import { IconArrow, IconSose } from '../assets/icons'
 import { useParams } from 'react-router-dom'
 import { useAxios } from '../hooks'
 
-
 const StyledVideolistsSection = styled.section`
   width: 100%;
   min-height: 400px;
-  margin-top: 20vh;
+  margin-top: 100vh;
   background-color: var(--jetblack);
 `
 const StyledVideolistsContent = styled.div`

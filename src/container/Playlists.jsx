@@ -9,7 +9,7 @@ import { useAxios } from '../hooks'
 const StyledPlaylistsSection = styled.section`
   width: 100%;
   height: auto;
-  background-color: ${props => (props.isHome ? '#f1f1f1' : '#282828')};
+  background-color: ${props => (props.page === 'home' ? '#f1f1f1' : '#282828')};
 `
 const StyledPlaylistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
@@ -102,7 +102,7 @@ const Playlists = () => {
   const [activeUser, setActiveUser] = useState('User')
   const [activeTitle, setActiveTitle] = useState('Title')
   const [activeTracks, setActiveTracks] = useState(0)
-  const { pageHome, playlistSlug } = useShop()
+  const { pageView, playlistSlug } = useShop()
 
   const getData = () => {
     axiosFetch({
@@ -189,10 +189,10 @@ const Playlists = () => {
   )
 
   return (
-    <StyledPlaylistsSection isHome={pageHome}>
+    <StyledPlaylistsSection page={pageView}>
       <StyledPlaylistsContent>
         <StyledPlaylistsInner>
-          {pageHome && pageHome ? HomeHeader : TrackHeader}
+          {pageView && pageView === 'home' ? HomeHeader : TrackHeader}
           {PlaylistCards}
         </StyledPlaylistsInner>
       </StyledPlaylistsContent>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import useShop from '../context/AppContext'
 import { Layout } from '../layout'
 import { Imprint } from '../container'
 
@@ -11,6 +12,13 @@ const StyledMainContainer = styled.main`
 
 // markup
 const Legal = () => {
+  const { appPageView } = useShop()
+
+  useEffect(() => {
+    appPageView('legal')
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <Layout>
       <StyledMainContainer>

@@ -12,7 +12,7 @@ const StyledPlayerSection = styled.div`
   height: 100vh;
   background-color: var(--black);
   &.player-home {
-    width: 420px;
+    width: 480px;
     height: 270px;
     top: 595px;
     right: 50px;

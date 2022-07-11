@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import { GlobalStyle, theme } from '../styles'
-import { Header, Player, Footer } from '../container'
+import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { Header, Footer } from '../container'
 
 // styled
 const StyledContent = styled.div`
@@ -14,26 +12,20 @@ const StyledContent = styled.div`
 
 // markup
 const Layout = ({ children }) => {
+  const { playlistSlug, playlistTrack } = useShop()
   const refTop = useRef(null)
-  const { pathname } = useLocation()
-  const { appPageHome } = useShop()
 
   useEffect(() => {
-    appPageHome(pathname === '/')
     refTop.current.scrollIntoView()
     // eslint-disable-next-line
-  }, [pathname])
+  }, [playlistSlug, playlistTrack])
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <StyledContent ref={refTop}>
-        <Header />
-        <div id="content">{children}</div>
-        <Player />
-        <Footer />
-      </StyledContent>
-    </ThemeProvider>
+    <StyledContent ref={refTop}>
+      <Header />
+      <div id="content">{children}</div>
+      <Footer />
+    </StyledContent>
   )
 }
 

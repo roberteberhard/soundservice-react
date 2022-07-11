@@ -26,12 +26,12 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /* Add home location if true  */
-  const appPageHome = isPageHome => {
+  /* Add page locations to view  */
+  const appPageView = strPageView => {
     dispatch({
-      type: 'APP_PAGE_HOME',
+      type: 'APP_PAGE_VIEW',
       payload: {
-        pageHome: isPageHome
+        pageView: strPageView
       }
     })
   }
@@ -39,10 +39,10 @@ export const AppProvider = ({ children }) => {
   const value = {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
-    pageHome: state.pageHome,
+    pageView: state.pageView,
     appPlaylistSlug,
     appPlaylistTrack,
-    appPageHome
+    appPageView
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

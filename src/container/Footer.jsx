@@ -53,11 +53,11 @@ const StyledInnerSection = styled.div`
 
 // markup
 const Footer = () => {
-  const { pageHome } = useShop()
+  const { pageView } = useShop()
 
   return (
     <StyledFooterSection>
-      <IconSeparatorDown isHome={pageHome} />
+      <IconSeparatorDown page={pageView} />
       <StyledFooterContent>
         <StyledInnerSection>
           <div className="footer-brand">
