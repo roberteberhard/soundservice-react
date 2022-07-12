@@ -11,9 +11,11 @@ const StyledPlayerSection = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
-  &.player-home {
+  &.player-home,
+  &.player-privacy,
+  &.player-legal {
     width: 420px;
-    height: 270px;
+    height: 236px;
     top: 595px;
     right: 50px;
     .remote-control {
@@ -150,9 +152,10 @@ const StyledVideoPlayer = styled.div`
 // markup
 const Player = () => {
   const [videoId, setVideoId] = useState('')
-  const [videoSize, setVideoSize] = useState({ w: '100%', h: '100%' })
-  const { pageView } = useShop()
+  const [videoSize, setVideoSize] = useState({ x: 0, y: 0, w: '420px', h: '236px' })
+  const { pageView, videoTracks } = useShop()
   const refPlayer = useRef(null)
+
   const opts = {
     width: videoSize.w,
     height: videoSize.h,
@@ -162,27 +165,22 @@ const Player = () => {
     }
   }
 
-  const handleScroll = () => {
-    console.log(123)
-  }
-
-  const onResize = e => {
-    console.log(e.currentTarget.innerWidth)
-    console.log(e.currentTarget.innerHeight)
-  }
+  useEffect(() => {
+    if (pageView === 'track') {
+      setVideoSize({ x: 0, y: 0, w: '1200px', h: '768px' })
+    } else {
+      setVideoSize({ x: 0, y: 0, w: '420px', h: '236px' })
+    }
+    // eslint-disable-next-line
+  }, [pageView])
 
   useEffect(() => {
-    setVideoId('e-1nsRJ3baE')
-    setVideoSize({ w: '640px', h: '480px' })
-
-    window.addEventListener('resize', onResize)
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      window.removeEventListener('scroll', handleScroll)
+    if (videoTracks) {
+      setVideoId(videoTracks[0])
     }
-  }, [])
+
+    // eslint-disable-next-line
+  }, [videoTracks])
 
   const onPlayClick = () => {
     refPlayer.current.internalPlayer.playVideo()

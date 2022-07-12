@@ -85,7 +85,7 @@ const Videolists = () => {
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
   const [activeTrack, setActiveTrack] = useState('Track')
-  const { playlistTrack } = useShop()
+  const { playlistTrack, appVideoTracks } = useShop()
   const { slug } = useParams()
 
   const getData = () => {
@@ -128,6 +128,8 @@ const Videolists = () => {
       setListIndex(getIndex(playlistTrack))
       setActiveArtist(getArtist(playlistTrack))
       setActiveTrack(getTrack(playlistTrack))
+      // add video list to state
+      appVideoTracks(posts.map(e => e.video))
     }
     // eslint-disable-next-line
   }, [posts, error, loading])

@@ -20,6 +20,12 @@ const shopReducer = (state, action) => {
         ...state,
         playlistTrack: payload.playlistTrack
       }
+    case 'APP_VIDEO_TRACKS':
+      //console.log('APP_VIDEO_TRACKS', payload)
+      return {
+        ...state,
+        videoTracks: payload.videoTracks
+      }
     case 'APP_PAGE_VIEW':
       //console.log('APP_PAGE_VIEW', payload)
       return {

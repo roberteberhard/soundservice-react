@@ -11,9 +11,11 @@ const StyledPlayerSection = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
-  &.player-home {
-    width: 480px;
-    height: 270px;
+  &.player-home,
+  &.player-privacy,
+  &.player-legal {
+    width: 420px;
+    height: 236px;
     top: 595px;
     right: 50px;
     .remote-control {
@@ -150,9 +152,10 @@ const StyledVideoPlayer = styled.div`
 // markup
 const Player = () => {
   const [videoId, setVideoId] = useState('')
-  const [videoSize, setVideoSize] = useState({ w: '100%', h: '100%' })
+  const [videoSize, setVideoSize] = useState({ x: 0, y: 0, w: '420px', h: '236px' })
   const { pageView } = useShop()
   const refPlayer = useRef(null)
+
   const opts = {
     width: videoSize.w,
     height: videoSize.h,
@@ -163,17 +166,30 @@ const Player = () => {
   }
 
   const handleScroll = () => {
-    console.log(123)
+/*     const posY = videoSize.y
+    const playerH = videoSize.h
+    console.log(posY, playerH) */
   }
 
   const onResize = e => {
-    console.log(e.currentTarget.innerWidth)
-    console.log(e.currentTarget.innerHeight)
-  }
+/*     if (pageView === 'track') {
+      setVideoSize({ w: e.currentTarget.innerWidth, h: e.currentTarget.innerHeight })
+    } else {
+      setVideoSize({ w: '420px', h: '236px' })
+    }
+  } */
+
+  useEffect(() => {
+
+
+    if (pageView === 'track') {
+    }
+
+  }, [pageView])
 
   useEffect(() => {
     setVideoId('e-1nsRJ3baE')
-    setVideoSize({ w: '640px', h: '480px' })
+    setVideoSize({ w: window.innerWidth, h: window.innerHeight })
 
     window.addEventListener('resize', onResize)
     window.addEventListener('scroll', handleScroll)
@@ -182,6 +198,7 @@ const Player = () => {
       window.removeEventListener('resize', onResize)
       window.removeEventListener('scroll', handleScroll)
     }
+    // eslint-disable-next-line
   }, [])
 
   const onPlayClick = () => {

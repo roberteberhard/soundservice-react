@@ -26,6 +26,16 @@ export const AppProvider = ({ children }) => {
     })
   }
 
+  /* Add video tracks array to state */
+  const appVideoTracks = arrVideoTracks => {
+    dispatch({
+      type: 'APP_VIDEO_TRACKS',
+      payload: {
+        videoTracks: arrVideoTracks
+      }
+    })
+  }
+
   /* Add page locations to view  */
   const appPageView = strPageView => {
     dispatch({
@@ -40,8 +50,10 @@ export const AppProvider = ({ children }) => {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
     pageView: state.pageView,
+    videoTracks: state.videoTracks,
     appPlaylistSlug,
     appPlaylistTrack,
+    appVideoTracks,
     appPageView
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
