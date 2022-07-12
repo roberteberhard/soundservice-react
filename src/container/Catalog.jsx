@@ -13,13 +13,22 @@ const StyledCatalogSection = styled.section`
   z-index: 1;
   margin-top: -400px;
   width: 100%;
-  height: 400px;
+  height: 440px;
   color: var(--text-color);
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
   background-color: transparent;
+  @media (max-width: 1080px) {
+    height: 420px;
+  }
+  @media (max-width: 768px) {
+    height: 600px;
+  }
+  @media (max-width: 480px) {
+    height: 580px;
+  }
 
   .catalog-start {
     position: absolute;

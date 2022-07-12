@@ -21,31 +21,42 @@ const StyledHeroContent = styled.div`
 
 const StyledInnerHeading = styled.div`
   width: 100%;
-  padding-top: 100px;
-  padding-left: 12px;
-  @media only screen and (min-width: $viewport-7) {
-    width: 80%;
-    padding-top: 130px;
+  padding: 200px 0 0 120px;
+  max-width: 920px;
+  @media (max-width: 1080px) {
+    padding: 200px 0 0 80px;
+    max-width: 720px;
   }
-  @media only screen and (min-width: $viewport-9) {
-    width: 60%;
-    padding-top: 140px;
+  @media (max-width: 768px) {
+    padding: 200px 0 0 0;
+    max-width: 640px;
   }
-  @media only screen and (min-width: $viewport-12) {
-    width: 50%;
-    padding-top: 160px;
+  @media (max-width: 480px) {
+    padding: 200px 0 0 0;
   }
-  @media only screen and (min-width: $viewport-15) {
-    width: 40%;
-    padding-top: 220px;
-  }
+
   h1.home-title {
-    color: $white;
+    color: var(--white);
     line-height: 1.1;
     margin-bottom: 25px;
+    padding-right: 140px;
+    font-size: 40px;
+    @media (max-width: 1080px) {
+      padding-right: 0;
+      font-size: 36px;
+    }
+    @media (max-width: 768px) {
+      padding-right: 0;
+      font-size: 32px;
+    }
+    @media (max-width: 480px) {
+      padding-right: 0;
+      font-size: 28px;
+    }
   }
   h2.home-subtitle {
-    color: $white;
+    color: var(--white);
+    font-family: var(--font-mono);
     line-height: 1.25;
   }
 `
@@ -58,7 +69,7 @@ const Hero = () => {
       <StyledHeroContent>
         <StyledInnerHeading>
           <h1 className="home-title">Welcome to Soundservice and enjoy our curated video playlists!</h1>
-          <h2 className="home-subtitle">Whether you are chilling out, coding or spending a day on the beach, different playlists are suitable for different situations and environments.</h2>
+          <h2 className="home-subtitle">Whether you're chilling, programming, or spending a day at the beach, different playlists are suitable for different situations and environments.</h2>
         </StyledInnerHeading>
       </StyledHeroContent>
     </StyledHeroSection>

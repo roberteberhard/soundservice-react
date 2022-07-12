@@ -38,12 +38,11 @@ const StyledPlaylistsInner = styled.div`
     }
     .playlist-title {
       color: var(--darkgrey);
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 22px;
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: var(--fz-heading);
       line-height: 1.35;
       text-align: center;
-      text-transform: uppercase;
     }
   }
   /* Track */

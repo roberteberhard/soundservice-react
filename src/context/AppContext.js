@@ -26,12 +26,22 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /* Add video tracks array to state */
-  const appVideoTracks = arrVideoTracks => {
+  /* Add video id to state */
+  const appTrackId = strTrackId => {
     dispatch({
-      type: 'APP_VIDEO_TRACKS',
+      type: 'APP_TRACK_ID',
       payload: {
-        videoTracks: arrVideoTracks
+        trackId: strTrackId
+      }
+    })
+  }
+
+  /* Add next track slug to state */
+  const appNextTrack = strNextTrack => {
+    dispatch({
+      type: 'APP_NEXT_TRACK',
+      payload: {
+        nextTrack: strNextTrack
       }
     })
   }
@@ -49,11 +59,13 @@ export const AppProvider = ({ children }) => {
   const value = {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
+    trackId: state.trackId,
+    nextTrack: state.nextTrack,
     pageView: state.pageView,
-    videoTracks: state.videoTracks,
     appPlaylistSlug,
     appPlaylistTrack,
-    appVideoTracks,
+    appTrackId,
+    appNextTrack,
     appPageView
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

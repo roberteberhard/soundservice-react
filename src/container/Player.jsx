@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
@@ -8,6 +9,7 @@ const StyledPlayerSection = styled.div`
   overflow: hidden;
   position: absolute;
   z-index: 5;
+  top: 0;
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
@@ -16,8 +18,20 @@ const StyledPlayerSection = styled.div`
   &.player-legal {
     width: 420px;
     height: 236px;
-    top: 595px;
-    right: 50px;
+    top: 600px;
+    left: calc(100% - 470px);
+    @media (max-width: 1080px) {
+      top: 600px;
+      left: calc(100% - 460px);
+    }
+    @media (max-width: 768px) {
+      top: 760px;
+      left: calc((100% - 420px) * 0.5);
+    }
+    @media (max-width: 480px) {
+      top: 660px;
+      left: calc((100% - 420px) * 0.5);
+    }
     .remote-control {
       display: flex;
       flex-direction: row;
@@ -32,8 +46,7 @@ const StyledPlayerSection = styled.div`
       left: 20px;
     }
     .partner-links {
-      top: 130px;
-      right: 22px;
+      display: none;
     }
   }
 `
@@ -143,25 +156,26 @@ const StyledPartnerLinks = styled.div`
   }
 `
 
-const StyledVideoPlayer = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: gray;
-`
-
 // markup
 const Player = () => {
   const [videoId, setVideoId] = useState('')
   const [videoSize, setVideoSize] = useState({ x: 0, y: 0, w: '420px', h: '236px' })
-  const { pageView, videoTracks } = useShop()
+  const { playlistSlug, trackId, nextTrack, pageView } = useShop()
   const refPlayer = useRef(null)
+  const navigate = useNavigate()
 
   const opts = {
     width: videoSize.w,
     height: videoSize.h,
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      autoplay: 1
+      autoplay: 1,
+      modestbranding: 1,
+      autohide: 1,
+      showinfo: 0,
+      controls: 0,
+      playsinline: 1,
+      rel: 0
     }
   }
 
@@ -175,12 +189,11 @@ const Player = () => {
   }, [pageView])
 
   useEffect(() => {
-    if (videoTracks) {
-      setVideoId(videoTracks[0])
+    if (trackId) {
+      setVideoId(trackId)
     }
-
     // eslint-disable-next-line
-  }, [videoTracks])
+  }, [trackId])
 
   const onPlayClick = () => {
     refPlayer.current.internalPlayer.playVideo()
@@ -189,12 +202,18 @@ const Player = () => {
     refPlayer.current.internalPlayer.pauseVideo()
   }
   const onNextClick = () => {
-    setVideoId('IxXBsPuAV0E')
+    navigate(`/track/${playlistSlug}/${nextTrack}`)
   }
 
   const onReady = event => {
-    // access to player in all event handlers via event.target
     event.target.pauseVideo()
+  }
+  const onEnd = event => {
+    navigate(`/track/${playlistSlug}/${nextTrack}`)
+  }
+  const onError = event => {
+    console.log('on error ....')
+    navigate(`/track/${playlistSlug}/${nextTrack}`)
   }
 
   const RemoteControl = (
@@ -243,13 +262,13 @@ const Player = () => {
     </div>
   )
 
-  const VideoPlayer = <YouTube id="player" ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} />
+  const VideoPlayer = <YouTube ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onEnd={onEnd} onError={onError} />
 
   return (
     <StyledPlayerSection className={`player-${pageView}`}>
       <StyledRemoteControl>{RemoteControl}</StyledRemoteControl>
       <StyledPartnerLinks>{PartnerLinks}</StyledPartnerLinks>
-      <StyledVideoPlayer>{VideoPlayer}</StyledVideoPlayer>
+      {VideoPlayer}
     </StyledPlayerSection>
   )
 }

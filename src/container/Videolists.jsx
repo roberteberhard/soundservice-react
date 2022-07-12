@@ -85,7 +85,7 @@ const Videolists = () => {
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
   const [activeTrack, setActiveTrack] = useState('Track')
-  const { playlistTrack, appVideoTracks } = useShop()
+  const { playlistTrack, appTrackId, appNextTrack } = useShop()
   const { slug } = useParams()
 
   const getData = () => {
@@ -107,6 +107,23 @@ const Videolists = () => {
     let index = posts.findIndex(obj => obj.track === track)
     return index >= 0 ? posts[index].title : 'Track'
   }
+  const addAppTrackId = track => {
+    let index = posts.findIndex(obj => obj.track === track)
+    appTrackId(index >= 0 ? posts[index].video : '')
+  }
+  const addAppNextTrack = track => {
+    const max = posts.length
+    let index = posts.findIndex(obj => obj.track === track) + 1
+    if (index >= 0 && max > 0) {
+      if (index < max) {
+        appNextTrack(posts[index].track)
+      } else {
+        appNextTrack(posts[0].track)
+      }
+    } else {
+      appNextTrack('')
+    }
+  }
 
   useEffect(() => {
     if (slug) getData()
@@ -118,6 +135,8 @@ const Videolists = () => {
       setListIndex(getIndex(playlistTrack))
       setActiveArtist(getArtist(playlistTrack))
       setActiveTrack(getTrack(playlistTrack))
+      addAppTrackId(playlistTrack)
+      addAppNextTrack(playlistTrack)
     }
     // eslint-disable-next-line
   }, [playlistTrack])
@@ -128,8 +147,8 @@ const Videolists = () => {
       setListIndex(getIndex(playlistTrack))
       setActiveArtist(getArtist(playlistTrack))
       setActiveTrack(getTrack(playlistTrack))
-      // add video list to state
-      appVideoTracks(posts.map(e => e.video))
+      addAppTrackId(playlistTrack)
+      addAppNextTrack(playlistTrack)
     }
     // eslint-disable-next-line
   }, [posts, error, loading])
