@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
   ::selection {
     color: var(--white);
-    background: lightgoldenrodyellow;
+    background: var(--secondary);
   }
   html {
     width: 100%;

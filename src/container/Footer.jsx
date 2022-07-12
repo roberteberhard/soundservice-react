@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
 import { Link } from 'react-router-dom'
-import { IconSeparatorDown } from '../assets/icons'
+import { IconSeparatorDown, IconSoundservice } from '../assets/icons'
 import { socials, email, year } from '../config'
 
 // styles
@@ -11,7 +11,7 @@ const StyledFooterSection = styled.footer`
   margin: 0;
   overflow: hidden;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-color: var(--jetblack);
   .separator {
     width: 100%;
@@ -21,7 +21,6 @@ const StyledFooterSection = styled.footer`
 `
 const StyledFooterContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
-
   @media (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
   }
@@ -31,41 +30,67 @@ const StyledFooterContent = styled.div`
 `
 
 const StyledInnerSection = styled.div`
-  margin: 0;
-  .footer-brand {
-    display: flex;
+  padding: 40px 0 300px 0;
+  border: 1px dotted green;
+  &.has-player {
+    border: 2px dotted red;
+  }
+`
+
+const StyledFooterBranding = styled.div`
+  margin-bottom: 40px;
+  .icon-soundservice {
+    width: 185px;
+    height: 20px;
+  }
+`
+const StyledFooterFavorites = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  @media (max-width: 1080px) {
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px;
-    @media only screen and {
-      align-items: flex-start;
-      margin-bottom: 30px;
+  }
+  .favorites-heading {
+    width: 100%;
+    margin-bottom: 30px;
+    h3 {
+      margin-bottom: 15px;
+      color: var(--ghost);
+      font-size: var(--fz-xl);
+      font-weight: 900;
+      text-align: left;
+      line-height: 1.25;
     }
-    .footer-brand__logo {
-      color: transparent;
-      font-size: 0;
-      &.i-sose::before {
-        background-image: var(--home-logo-white);
-      }
+    p {
+      color: var(--lightgrey);
+      text-align: left;
+      line-height: 1.25;
     }
+  }
+  .favorites-socials {
+    width: 100%;
+    margin-bottom: 30px;
   }
 `
 
 // markup
 const Footer = () => {
-  const { pageView } = useShop()
+  const { playlistSlug, pageView } = useShop()
 
   return (
     <StyledFooterSection>
       <IconSeparatorDown page={pageView} />
       <StyledFooterContent>
-        <StyledInnerSection>
-          <div className="footer-brand">
-            <div className="footer-brand__logo i-sose">Soundservice</div>
-          </div>
-          <nav className="footer-nav">
-            <div className="footer-meta">
-              <h2>Do you have your own favorite song or do you miss one?</h2>
+        <StyledInnerSection className={playlistSlug !== '' ? 'has-player' : ''}>
+          <StyledFooterBranding>
+            <Link to={'/'}>
+              <IconSoundservice />
+            </Link>
+          </StyledFooterBranding>
+          <StyledFooterFavorites>
+            <div className="favorites-heading">
+              <h3>Do you have your own favorite song or do you miss one?</h3>
               <p>
                 We would like to expand this list, add more tracks. Leave us a{' '}
                 <a className="link" href={`mailto:${email}`}>
@@ -74,7 +99,7 @@ const Footer = () => {
                 with your favorite song, we are curious which song you love.
               </p>
             </div>
-            <div className="footer-social">
+            <div className="favorites-socials">
               <ul>
                 <li>
                   <a href={socials[0].url} target="_blank" rel="noreferrer">
@@ -93,7 +118,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-          </nav>
+          </StyledFooterFavorites>
           <nav className="footer-legal">
             <div className="footer-privacy">
               <ul>

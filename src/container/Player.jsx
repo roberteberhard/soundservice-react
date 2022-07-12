@@ -6,6 +6,7 @@ import useShop from '../context/AppContext'
 
 // styles
 const StyledPlayerSection = styled.div`
+  display: ${props => (props.hasPlayer !== '' ? `block` : `none`)};
   overflow: hidden;
   position: absolute;
   z-index: 5;
@@ -13,9 +14,7 @@ const StyledPlayerSection = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
-  &.player-home,
-  &.player-privacy,
-  &.player-legal {
+  &.player-home {
     width: 420px;
     height: 236px;
     top: 600px;
@@ -44,6 +43,20 @@ const StyledPlayerSection = styled.div`
       font-size: 0;
       top: 126px;
       left: 20px;
+    }
+    .partner-links {
+      display: none;
+    }
+  }
+  &.player-privacy,
+  &.player-legal {
+    position: fixed;
+    width: 420px;
+    height: 236px;
+    top: calc(100vh - 286px);
+    left: calc(100% - 470px);
+    .remote-control {
+      display: none;
     }
     .partner-links {
       display: none;
@@ -265,7 +278,7 @@ const Player = () => {
   const VideoPlayer = <YouTube ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onEnd={onEnd} onError={onError} />
 
   return (
-    <StyledPlayerSection className={`player-${pageView}`}>
+    <StyledPlayerSection hasPlayer={playlistSlug} className={`player-${pageView}`}>
       <StyledRemoteControl>{RemoteControl}</StyledRemoteControl>
       <StyledPartnerLinks>{PartnerLinks}</StyledPartnerLinks>
       {VideoPlayer}
