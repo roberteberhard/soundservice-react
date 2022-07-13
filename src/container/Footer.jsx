@@ -105,6 +105,7 @@ const StyledFooterCopyright = styled.nav`
   font-size: var(--fz-sm);
   font-weight: 600;
   a {
+    cursor: pointer;
     color: var(--primary);
     &:hover,
     &:focus {

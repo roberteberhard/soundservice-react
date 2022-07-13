@@ -116,17 +116,21 @@ const GlobalStyle = createGlobalStyle`
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     a {
+      pointer:cursor;
       color: var(--primary);
       text-decoration: none;
     }
   }
   a {
+    cursor: pointer;
     display: inline-block;
     text-decoration: none;
     text-decoration-skip-ink: auto;
     color: inherit;
     position: relative;
     transition: var(--transition);
+    padding: 3px;
+    border: 1px dotted var(--primary);
     &:hover,
     &:focus {
       color: var(--secondary);

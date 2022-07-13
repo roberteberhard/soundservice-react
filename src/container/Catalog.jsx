@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useAxios } from '../hooks'
 import { IconPlay } from '../assets/icons'
+import { images } from '../constants'
 import Wave from '../assets/svgs/wave.svg'
 
 // styles
@@ -104,11 +105,59 @@ const StyledEmptyPlayer = styled.div`
   display: ${props => (props.hasPlayer === '' ? `block` : `none`)};
   width: 420px;
   height: 236px;
-  border: 5px solid var(--darkgrey);
-  background-color: var(--ghost);
+  border: 0px solid var(--darkgrey);
   top: 136px;
   left: calc(100% - 470px);
-  box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
+  @media (max-width: 1080px) {
+    top: 136px;
+    left: calc(100% - 460px);
+  }
+  @media (max-width: 768px) {
+    top: 296px;
+    left: calc((100% - 420px) * 0.5);
+  }
+  @media (max-width: 480px) {
+    top: 660px;
+    left: calc((100% - 420px) * 0.5);
+  }
+`
+const StyledEmptyJesus = styled.div`
+  position: absolute;
+  z-index: 3;
+  width: 500px;
+  height: 400px;
+  top: 60px;
+  left: calc(100% - 500px);
+  background-size: 500px auto;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: url(${images.jesus});
+  @media (max-width: 1080px) {
+    top: 136px;
+    left: calc(100% - 460px);
+  }
+  @media (max-width: 768px) {
+    top: 296px;
+    left: calc((100% - 420px) * 0.5);
+  }
+  @media (max-width: 480px) {
+    top: 660px;
+    left: calc((100% - 420px) * 0.5);
+  }
+`
+
+const StyledEmptyTape = styled.div`
+  position: absolute;
+  display: ${props => (props.hasPlayer === '' ? `block` : `none`)};
+  z-index: 5;
+  width: 400px;
+  height: 300px;
+  top: 140px;
+  left: calc(100% - 450px);
+  background-size: 400px auto;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: url(${images.tape});
   @media (max-width: 1080px) {
     top: 136px;
     left: calc(100% - 460px);
@@ -125,7 +174,7 @@ const StyledEmptyPlayer = styled.div`
 
 const StyledPlayerNavi = styled.nav`
   position: absolute;
-  z-index: 6;
+  z-index: 4;
   top: 380px;
   left: calc(100% - 470px);
   display: flex;
@@ -153,7 +202,7 @@ const StyledPlayerNavi = styled.nav`
     font-weight: 600;
     .btn {
       cursor: pointer;
-      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
+      /* pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)}; */
       padding: 5px 10px;
       transition: var(--transition);
       &:hover,
@@ -173,7 +222,7 @@ const StyledPlayerNavi = styled.nav`
     font-weight: 600;
     .btn {
       cursor: pointer;
-      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
+      /* pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)}; */
       padding: 5px 10px;
       transition: var(--transition);
       &:hover,
@@ -228,13 +277,13 @@ const Catalog = () => {
   return (
     <StyledCatalogSection style={{ backgroundImage: `url(${Wave})` }}>
       <div className="catalog-start">
-        <Link class="start-link" to={`/track/${slug}/${track}`}>
-          <div className="start-now ready">
-            <IconPlay />
-          </div>
+        <Link className="start-link ready" to={`/track/${slug}/${track}`}>
+          <IconPlay />
         </Link>
       </div>
       <StyledEmptyPlayer hasPlayer={playlistSlug} />
+      <StyledEmptyJesus />
+      <StyledEmptyTape hasPlayer={playlistSlug} />
       <StyledPlayerNavi hasPlayer={playlistSlug}>
         <div className="player-controls">
           <div className="btn" onClick={() => onPlayClick()}>
