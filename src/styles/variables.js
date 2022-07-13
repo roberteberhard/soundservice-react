@@ -10,10 +10,10 @@ const variables = css`
     --black: #000000;
     --jetblack: #1e1e1e;
     --lightblack: #282828;
+    --lightgrey: #999999;
 
     --darkgrey: #3c3c3e;
     --oilgrey: #4a4a4a;
-    --lightgrey: #999999;
 
     --primary: #97d058;
     --secondary: #64a10e;

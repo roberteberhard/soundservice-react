@@ -20,18 +20,17 @@ const StyledFooterSection = styled.footer`
   }
 `
 const StyledFooterContent = styled.div`
-  padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
+  padding: 0 var(--pad-lg) var(--pad-lg) var(--pad-lg);
   @media (max-width: 1080px) {
-    padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
+    padding: 0 var(--pad-md) var(--pad-md) var(--pad-md);
   }
   @media (max-width: 768px) {
-    padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
+    padding: 0 var(--pad-sm) var(--pad-sm) var(--pad-sm);
   }
 `
 
 const StyledInnerSection = styled.div`
   padding: 40px 0 0 0;
-  border: 1px dotted green;
   &.has-player {
     border: 2px dotted red;
   }
@@ -46,10 +45,10 @@ const StyledFooterBranding = styled.div`
 `
 const StyledFooterFavorites = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   .favorites-heading {
-    width: 100%;
-    margin-bottom: 60px;
+    width: 60%;
+    margin-bottom: 120px;
     h3 {
       margin-bottom: 15px;
       color: var(--ghost);
@@ -66,9 +65,9 @@ const StyledFooterFavorites = styled.div`
   }
   .favorites-socials {
     display: flex;
-    width: 100%;
-    margin-left: -10px;
-    margin-bottom: 30px;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 40%;
     .social-links {
       display: block;
       overflow: hidden;
@@ -77,7 +76,6 @@ const StyledFooterFavorites = styled.div`
       margin: 0 4px;
       padding: 6px;
       border-radius: 50%;
-
       &.plane {
         padding: 7px;
       }
@@ -100,7 +98,31 @@ const StyledFooterFavorites = styled.div`
 `
 const StyledFooterCopyright = styled.nav`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--ghost);
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  font-weight: 600;
+  a {
+    color: var(--primary);
+    &:hover,
+    &:focus {
+      color: var(--secondary);
+    }
+  }
+  .footer-copyright {
+    .strong {
+      font-weight: 900;
+    }
+  }
+  .footer-policy {
+    .policy-spacer {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: var(--fz-xxs);
+    }
+  }
 `
 
 // markup
@@ -141,16 +163,23 @@ const Footer = () => {
             </div>
           </StyledFooterFavorites>
           <StyledFooterCopyright>
-            <div className="footer-privacy">
+            <div className="footer-copyright">
+              <span className="strong">© SOUNDSERVICE {year}</span>{' '}
+              <span className="designed-by">
+                - Designed and built by{' '}
+                <a href="https://roberteberhard.com" target="_blank" rel="noopener noreferrer">
+                  Robert Eberhard
+                </a>
+              </span>
+            </div>
+            <div className="footer-policy">
               <Link to={'/Privacy'} className="footer-link">
                 Privacy
               </Link>
+              <span className="policy-spacer">•</span>
               <Link to={'/Legal'} className="footer-link">
                 Legal
               </Link>
-            </div>
-            <div className="footer-copyright">
-              <p>© SOUNDSERVICE {year} • Designed and built by Robert Eberhard</p>
             </div>
           </StyledFooterCopyright>
         </StyledInnerSection>
