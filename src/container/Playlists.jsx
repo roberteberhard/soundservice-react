@@ -12,12 +12,12 @@ const StyledPlaylistsSection = styled.section`
   background-color: ${props => (props.page === 'home' ? '#f1f1f1' : '#282828')};
 `
 const StyledPlaylistsContent = styled.div`
-  padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
+  padding: 20px var(--pad-lg) var(--pad-xxl) var(--pad-lg);
   @media (max-width: 1080px) {
-    padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
+    padding: 50px var(--pad-md) var(--pad-xl) var(--pad-md);
   }
   @media (max-width: 768px) {
-    padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
+    padding: 40px var(--pad-sm) var(--pad-lg) var(--pad-sm);
   }
 `
 

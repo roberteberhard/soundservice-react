@@ -16,7 +16,7 @@ const StyledCatalogSection = styled.section`
   z-index: 1;
   margin-top: -400px;
   width: 100%;
-  height: 440px;
+  height: 400px;
   color: var(--text-color);
   text-align: center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@ const StyledCatalogSection = styled.section`
     height: 600px;
   }
   @media (max-width: 480px) {
-    height: 580px;
+    height: 400px;
   }
 
   .catalog-start {
@@ -45,24 +45,15 @@ const StyledCatalogSection = styled.section`
       width: 78px;
       height: 78px;
       border-radius: 50%;
-
+      &.ready {
+        animation: fadeInAndScale 500ms normal forwards;
+      }
       &:hover,
       &:focus {
-        animation: scaleInAndOut 500ms normal forwards;
-        .start-now {
-          .play-arrow,
-          .play-circle {
-            fill: var(--primary);
-            transition: var(--transition);
-          }
-        }
-      }
-      .start-now {
-        display: block;
-        width: 78px;
-        height: 78px;
-        &.ready {
-          animation: fadeInAndScale 500ms normal forwards;
+        .play-arrow,
+        .play-circle {
+          fill: var(--primary);
+          transition: var(--transition);
         }
       }
     }
@@ -80,47 +71,9 @@ const StyledCatalogSection = styled.section`
         transform: scale(1);
       }
     }
-    @keyframes scaleInAndOut {
-      0% {
-        transform: scale(1);
-      }
-      10% {
-        transform: scale(0.9);
-      }
-      80% {
-        opacity: 0.8;
-        transform: scale(1.15);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
   }
 `
 
-const StyledEmptyPlayer = styled.div`
-  position: absolute;
-  z-index: 6;
-  display: ${props => (props.hasPlayer === '' ? `block` : `none`)};
-  width: 420px;
-  height: 236px;
-  border: 0px solid var(--darkgrey);
-  top: 136px;
-  left: calc(100% - 470px);
-  @media (max-width: 1080px) {
-    top: 136px;
-    left: calc(100% - 460px);
-  }
-  @media (max-width: 768px) {
-    top: 296px;
-    left: calc((100% - 420px) * 0.5);
-  }
-  @media (max-width: 480px) {
-    top: 660px;
-    left: calc((100% - 420px) * 0.5);
-  }
-`
 const StyledEmptyJesus = styled.div`
   position: absolute;
   z-index: 3;
@@ -133,12 +86,12 @@ const StyledEmptyJesus = styled.div`
   background-position: 0 0;
   background-image: url(${images.jesus});
   @media (max-width: 1080px) {
-    top: 136px;
-    left: calc(100% - 460px);
+    top: 60px;
+    left: calc(100% - 490px);
   }
   @media (max-width: 768px) {
-    top: 296px;
-    left: calc((100% - 420px) * 0.5);
+    top: 220px;
+    left: calc((100% - 480px) * 0.5);
   }
   @media (max-width: 480px) {
     top: 660px;
@@ -196,23 +149,23 @@ const StyledPlayerNavi = styled.nav`
   .player-controls {
     display: flex;
     flex-direction: row;
-    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--darkgrey)`)};
+    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--white)`)};
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 600;
     .btn {
       cursor: pointer;
-      /* pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)}; */
+      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
       padding: 5px 10px;
       transition: var(--transition);
+      background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
       &:hover,
       &:focus {
-        color: var(--secondary);
+        background-color: var(--secondary);
       }
     }
-    .cir {
-      padding-top: 7px;
-      font-size: var(--fz-xs);
+    .spc {
+      width: 6px;
     }
   }
   .player-backwards {
@@ -222,7 +175,7 @@ const StyledPlayerNavi = styled.nav`
     font-weight: 600;
     .btn {
       cursor: pointer;
-      /* pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)}; */
+      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
       padding: 5px 10px;
       transition: var(--transition);
       &:hover,
@@ -238,7 +191,7 @@ const Catalog = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
   const [slug, setSlug] = useState('')
   const [track, setTrack] = useState('')
-  const { playlistSlug, playlistTrack, nextTrack } = useShop()
+  const { playlistSlug, playlistTrack, trackIsPlaying, nextTrack, appPlayPauseTrack } = useShop()
   const navigate = useNavigate()
 
   const getData = () => {
@@ -250,8 +203,7 @@ const Catalog = () => {
   }
 
   const onPlayClick = () => {
-    //refPlayer.current.internalPlayer.playVideo()
-    //refPlayer.current.internalPlayer.pauseVideo()
+    trackIsPlaying ? appPlayPauseTrack('pause') : appPlayPauseTrack('play')
   }
   const onNextClick = () => {
     navigate(`/track/${playlistSlug}/${nextTrack}`)
@@ -281,15 +233,14 @@ const Catalog = () => {
           <IconPlay />
         </Link>
       </div>
-      <StyledEmptyPlayer hasPlayer={playlistSlug} />
       <StyledEmptyJesus />
       <StyledEmptyTape hasPlayer={playlistSlug} />
       <StyledPlayerNavi hasPlayer={playlistSlug}>
         <div className="player-controls">
           <div className="btn" onClick={() => onPlayClick()}>
-            Play
+            {trackIsPlaying ? 'Pause' : 'Play'}
           </div>
-          <span className="cir">•</span>
+          <span className="spc"></span>
           <div className="btn" onClick={() => onNextClick()}>
             Next
           </div>

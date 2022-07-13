@@ -116,7 +116,7 @@ const GlobalStyle = createGlobalStyle`
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     a {
-      pointer:cursor;
+      cursor: pointer;
       color: var(--primary);
       text-decoration: none;
     }
@@ -129,25 +129,9 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     position: relative;
     transition: var(--transition);
-    padding: 3px;
-    border: 1px dotted var(--primary);
     &:hover,
     &:focus {
       color: var(--secondary);
-    }
-  }
-  .link {
-    cursor: pointer;
-    color: var(--primary);
-    text-decoration: none;
-    font-size: 16px;
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: 0;
-    word-wrap: break-word;
-    transition: color .6s cubic-bezier(.19,1,.22,1);
-    &:hover {
-      color: var(--secondary)
     }
   }
   button {

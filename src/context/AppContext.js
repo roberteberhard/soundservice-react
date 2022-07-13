@@ -36,6 +36,26 @@ export const AppProvider = ({ children }) => {
     })
   }
 
+  /* Add video playing state */
+  const appTrackIsPlaying = boolTrackIsPlaying => {
+    dispatch({
+      type: 'APP_TRACK_IS_PLAYING',
+      payload: {
+        trackIsPlaying: boolTrackIsPlaying
+      }
+    })
+  }
+
+  /* Execute play or pause video funtionality */
+  const appPlayPauseTrack = funcPlayPauseTrack => {
+    dispatch({
+      type: 'APP_PLAY_PAUSE_TRACK',
+      payload: {
+        playPauseTrack: funcPlayPauseTrack
+      }
+    })
+  }
+
   /* Add next track slug to state */
   const appNextTrack = strNextTrack => {
     dispatch({
@@ -60,11 +80,15 @@ export const AppProvider = ({ children }) => {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
     trackId: state.trackId,
+    trackIsPlaying: state.trackIsPlaying,
+    playPauseTrack: state.playPauseTrack,
     nextTrack: state.nextTrack,
     pageView: state.pageView,
     appPlaylistSlug,
     appPlaylistTrack,
     appTrackId,
+    appTrackIsPlaying,
+    appPlayPauseTrack,
     appNextTrack,
     appPageView
   }

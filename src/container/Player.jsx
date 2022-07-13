@@ -165,7 +165,7 @@ const StyledPartnerLinks = styled.div`
 const Player = () => {
   const [videoId, setVideoId] = useState('')
   const [videoSize, setVideoSize] = useState({ x: 0, y: 0, w: '420px', h: '236px' })
-  const { playlistSlug, trackId, nextTrack, pageView } = useShop()
+  const { playlistSlug, trackId, playPauseTrack, nextTrack, pageView, appTrackIsPlaying } = useShop()
   const refPlayer = useRef(null)
   const navigate = useNavigate()
 
@@ -200,6 +200,11 @@ const Player = () => {
     // eslint-disable-next-line
   }, [trackId])
 
+  useEffect(() => {
+    playPauseTrack === 'play' ? onPlayClick() : onPauseClick()
+    // eslint-disable-next-line
+  }, [playPauseTrack])
+
   const onPlayClick = () => {
     refPlayer.current.internalPlayer.playVideo()
   }
@@ -213,12 +218,17 @@ const Player = () => {
   const onReady = event => {
     event.target.pauseVideo()
   }
+  const onPlay = event => {
+    appTrackIsPlaying(true)
+  }
+  const onPause = event => {
+    appTrackIsPlaying(false)
+  }
   const onEnd = event => {
     navigate(`/track/${playlistSlug}/${nextTrack}`)
   }
   const onError = event => {
-    console.log('on error ....')
-    navigate(`/track/${playlistSlug}/${nextTrack}`)
+    event.target.pauseVideo()
   }
 
   const RemoteControl = (
@@ -267,7 +277,7 @@ const Player = () => {
     </div>
   )
 
-  const VideoPlayer = <YouTube ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onEnd={onEnd} onError={onError} />
+  const VideoPlayer = <YouTube ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onPlay={onPlay} onPause={onPause} onEnd={onEnd} onError={onError} />
 
   return (
     <StyledPlayerSection hasPlayer={playlistSlug} className={`player-${pageView}`}>
