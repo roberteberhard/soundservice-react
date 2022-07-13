@@ -28,11 +28,17 @@ const StyledHeaderInner = styled.div`
   top: 36px;
   width: 100%;
   height: 48px;
-
   .navbar-logo {
     cursor: pointer;
     width: 48px;
     height: 48px;
+    &:hover,
+    &:focus {
+      .icon-logo__path {
+        fill: var(--primary);
+        transition: var(--transition);
+      }
+    }
   }
 `
 

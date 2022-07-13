@@ -19,6 +19,7 @@ const StyledPlayerSection = styled.div`
     height: 236px;
     top: 600px;
     left: calc(100% - 470px);
+    box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
     @media (max-width: 1080px) {
       top: 600px;
       left: calc(100% - 460px);
@@ -32,17 +33,7 @@ const StyledPlayerSection = styled.div`
       left: calc((100% - 420px) * 0.5);
     }
     .remote-control {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      z-index: 55;
-      top: calc(100vh - 97px);
-      left: 40px;
-      font-size: 0;
-      top: 126px;
-      left: 20px;
+      display: none;
     }
     .partner-links {
       display: none;
@@ -55,6 +46,7 @@ const StyledPlayerSection = styled.div`
     height: 236px;
     top: calc(100vh - 286px);
     left: calc(100% - 470px);
+    box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
     .remote-control {
       display: none;
     }

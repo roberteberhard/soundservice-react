@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
+import useShop from '../context/AppContext'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useAxios } from '../hooks'
 import { IconPlay } from '../assets/icons'
@@ -32,29 +34,56 @@ const StyledCatalogSection = styled.section`
 
   .catalog-start {
     position: absolute;
-    top: 0px;
+    z-index: 2;
     left: 0px;
     width: 55%;
     height: auto;
-    .start-now {
-      cursor: pointer;
+    .start-link {
       display: block;
-      margin: 10px auto 0;
+      margin: 0 auto;
       width: 78px;
       height: 78px;
-      color: transparent;
-      font-size: 0;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      background-size: 100% 100%;
-      appearance: none;
-      &.ready {
-        animation: uiFadeIn 500ms normal forwards;
+      border-radius: 50%;
+
+      &:hover,
+      &:focus {
+        animation: scaleInAndOut 500ms normal forwards;
+        .start-now {
+          .play-arrow,
+          .play-circle {
+            fill: var(--primary);
+            transition: var(--transition);
+          }
+        }
+      }
+      .start-now {
+        display: block;
+        width: 78px;
+        height: 78px;
+        &.ready {
+          animation: fadeInAndScale 500ms normal forwards;
+        }
       }
     }
-    @keyframes uiFadeIn {
+    @keyframes fadeInAndScale {
       0% {
         opacity: 0;
+        transform: scale(0.9);
+      }
+      80% {
+        opacity: 0.8;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes scaleInAndOut {
+      0% {
+        transform: scale(1);
+      }
+      10% {
         transform: scale(0.9);
       }
       80% {
@@ -69,11 +98,99 @@ const StyledCatalogSection = styled.section`
   }
 `
 
+const StyledEmptyPlayer = styled.div`
+  position: absolute;
+  z-index: 6;
+  display: ${props => (props.hasPlayer === '' ? `block` : `none`)};
+  width: 420px;
+  height: 236px;
+  border: 5px solid var(--darkgrey);
+  background-color: var(--ghost);
+  top: 136px;
+  left: calc(100% - 470px);
+  box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
+  @media (max-width: 1080px) {
+    top: 136px;
+    left: calc(100% - 460px);
+  }
+  @media (max-width: 768px) {
+    top: 296px;
+    left: calc((100% - 420px) * 0.5);
+  }
+  @media (max-width: 480px) {
+    top: 660px;
+    left: calc((100% - 420px) * 0.5);
+  }
+`
+
+const StyledPlayerNavi = styled.nav`
+  position: absolute;
+  z-index: 6;
+  top: 380px;
+  left: calc(100% - 470px);
+  display: flex;
+  justify-content: space-between;
+  width: 420px;
+  height: 30px;
+  @media (max-width: 1080px) {
+    top: 380px;
+    left: calc(100% - 460px);
+  }
+  @media (max-width: 768px) {
+    top: 540px;
+    left: calc((100% - 420px) * 0.5);
+  }
+  @media (max-width: 480px) {
+    top: 440px;
+    left: calc((100% - 420px) * 0.5);
+  }
+  .player-controls {
+    display: flex;
+    flex-direction: row;
+    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--darkgrey)`)};
+    font-family: var(--font-mono);
+    font-size: var(--fz-md);
+    font-weight: 600;
+    .btn {
+      cursor: pointer;
+      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
+      padding: 5px 10px;
+      transition: var(--transition);
+      &:hover,
+      &:focus {
+        color: var(--secondary);
+      }
+    }
+    .cir {
+      padding-top: 7px;
+      font-size: var(--fz-xs);
+    }
+  }
+  .player-backwards {
+    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--darkgrey)`)};
+    font-family: var(--font-mono);
+    font-size: var(--fz-md);
+    font-weight: 600;
+    .btn {
+      cursor: pointer;
+      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
+      padding: 5px 10px;
+      transition: var(--transition);
+      &:hover,
+      &:focus {
+        color: var(--secondary);
+      }
+    }
+  }
+`
+
 // markup
 const Catalog = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
-  const [slug, setSlug] = useState('a')
-  const [track, setTrack] = useState('b')
+  const [slug, setSlug] = useState('')
+  const [track, setTrack] = useState('')
+  const { playlistSlug, playlistTrack, nextTrack } = useShop()
+  const navigate = useNavigate()
 
   const getData = () => {
     axiosFetch({
@@ -81,6 +198,18 @@ const Catalog = () => {
       method: 'GET',
       url: '/playlists'
     })
+  }
+
+  const onPlayClick = () => {
+    //refPlayer.current.internalPlayer.playVideo()
+    //refPlayer.current.internalPlayer.pauseVideo()
+  }
+  const onNextClick = () => {
+    navigate(`/track/${playlistSlug}/${nextTrack}`)
+  }
+
+  const onBackClick = () => {
+    navigate(`/track/${playlistSlug}/${playlistTrack}`)
   }
 
   useEffect(() => {
@@ -99,12 +228,29 @@ const Catalog = () => {
   return (
     <StyledCatalogSection style={{ backgroundImage: `url(${Wave})` }}>
       <div className="catalog-start">
-        <Link to={`/track/${slug}/${track}`}>
+        <Link class="start-link" to={`/track/${slug}/${track}`}>
           <div className="start-now ready">
             <IconPlay />
           </div>
         </Link>
       </div>
+      <StyledEmptyPlayer hasPlayer={playlistSlug} />
+      <StyledPlayerNavi hasPlayer={playlistSlug}>
+        <div className="player-controls">
+          <div className="btn" onClick={() => onPlayClick()}>
+            Play
+          </div>
+          <span className="cir">•</span>
+          <div className="btn" onClick={() => onNextClick()}>
+            Next
+          </div>
+        </div>
+        <div className="player-backwards">
+          <div className="btn" onClick={() => onBackClick()}>
+            Back to Track
+          </div>
+        </div>
+      </StyledPlayerNavi>
     </StyledCatalogSection>
   )
 }

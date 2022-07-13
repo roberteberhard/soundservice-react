@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
 import { Link } from 'react-router-dom'
-import { IconSeparatorDown, IconSoundservice } from '../assets/icons'
+import { IconTwitter, IconInstagram, IconPlane, IconSeparatorDown, IconSoundservice } from '../assets/icons'
 import { socials, email, year } from '../config'
 
 // styles
@@ -30,7 +30,7 @@ const StyledFooterContent = styled.div`
 `
 
 const StyledInnerSection = styled.div`
-  padding: 40px 0 300px 0;
+  padding: 40px 0 0 0;
   border: 1px dotted green;
   &.has-player {
     border: 2px dotted red;
@@ -46,14 +46,10 @@ const StyledFooterBranding = styled.div`
 `
 const StyledFooterFavorites = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  @media (max-width: 1080px) {
-    flex-direction: column;
-  }
+  flex-direction: column;
   .favorites-heading {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     h3 {
       margin-bottom: 15px;
       color: var(--ghost);
@@ -69,9 +65,42 @@ const StyledFooterFavorites = styled.div`
     }
   }
   .favorites-socials {
+    display: flex;
     width: 100%;
+    margin-left: -10px;
     margin-bottom: 30px;
+    .social-links {
+      display: block;
+      overflow: hidden;
+      width: 44px;
+      height: 44px;
+      margin: 0 4px;
+      padding: 6px;
+      border-radius: 50%;
+
+      &.plane {
+        padding: 7px;
+      }
+      &:hover,
+      &:focus {
+        .icon-instagram,
+        .icon-twitter,
+        .icon-plane {
+          stroke: var(--primary);
+        }
+      }
+      .icon-instagram,
+      .icon-twitter,
+      .icon-plane {
+        stroke: var(--white);
+        transition: var(--transition);
+      }
+    }
   }
+`
+const StyledFooterCopyright = styled.nav`
+  display: flex;
+  flex-direction: column;
 `
 
 // markup
@@ -100,44 +129,30 @@ const Footer = () => {
               </p>
             </div>
             <div className="favorites-socials">
-              <ul>
-                <li>
-                  <a href={socials[0].url} target="_blank" rel="noreferrer">
-                    <div className="social-icon i-twitter">{socials[0].name}</div>
-                  </a>
-                </li>
-                <li>
-                  <a href={socials[1].url} target="_blank" rel="noreferrer">
-                    <div className="social-icon i-instagram">{socials[1].name}</div>
-                  </a>
-                </li>
-                <li>
-                  <a className="link" href={`mailto:${email}`}>
-                    <div className="social-icon i-airplane">Email</div>
-                  </a>
-                </li>
-              </ul>
+              <a className="social-links" href={socials[0].url} target="_blank" rel="noreferrer">
+                <IconInstagram />
+              </a>
+              <a className="social-links" href={socials[1].url} target="_blank" rel="noreferrer">
+                <IconTwitter />
+              </a>
+              <a className="social-links plane" href={`mailto:${email}`}>
+                <IconPlane />
+              </a>
             </div>
           </StyledFooterFavorites>
-          <nav className="footer-legal">
+          <StyledFooterCopyright>
             <div className="footer-privacy">
-              <ul>
-                <li>
-                  <Link to={'/Privacy'} className="link">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/Legal'} className="link">
-                    Legal
-                  </Link>
-                </li>
-              </ul>
+              <Link to={'/Privacy'} className="footer-link">
+                Privacy
+              </Link>
+              <Link to={'/Legal'} className="footer-link">
+                Legal
+              </Link>
             </div>
             <div className="footer-copyright">
-              <p>© SoundService {year}</p>
+              <p>© SOUNDSERVICE {year} • Designed and built by Robert Eberhard</p>
             </div>
-          </nav>
+          </StyledFooterCopyright>
         </StyledInnerSection>
       </StyledFooterContent>
     </StyledFooterSection>

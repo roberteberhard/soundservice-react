@@ -9,7 +9,7 @@ const StyledHeroSection = styled.section`
 const StyledHeroContent = styled.div`
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: 1;
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
   @media (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
