@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
 import { Layout } from '../layout'
-import { Hero, Catalog, Playlists } from '../container'
+import { Slider, Hero, Catalog, Playlists } from '../container'
 
 // styles
 const StyledMainContainer = styled.main``
@@ -19,6 +19,7 @@ const Home = () => {
   return (
     <Layout>
       <StyledMainContainer>
+        <Slider />
         <Hero />
         <Catalog />
         <Playlists />

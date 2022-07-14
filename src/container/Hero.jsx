@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from '../apis/playlists'
-import { Slider } from '../components'
 import { Link } from 'react-router-dom'
 import { IconPlay } from '../assets/icons'
 import { useAxios } from '../hooks'
 
 // styles
 const StyledHeroSection = styled.section`
-  position: relative;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+  min-height: 800px;
+  height: calc(100vh + 200px);
+  @media (min-height: 1000px) {
+    height: 1000px;
+  }
 `
+
 const StyledHeroContent = styled.div`
   position: absolute;
   top: 0;
@@ -130,7 +138,6 @@ const Hero = () => {
 
   return (
     <StyledHeroSection>
-      <Slider />
       <StyledHeroContent>
         <StyledInnerHeading>
           <h1 className="home-title">Welcome to Soundservice and enjoy our curated video playlists!</h1>

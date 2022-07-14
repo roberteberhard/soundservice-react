@@ -10,7 +10,7 @@ const StyledCatalogSection = styled.section`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  margin-top: -360px;
+  margin-top: -400px;
   width: 100%;
   height: 480px;
   color: var(--text-color);

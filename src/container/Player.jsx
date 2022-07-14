@@ -9,27 +9,29 @@ const StyledPlayerSection = styled.div`
   display: ${props => (props.hasPlayer !== '' ? `block` : `none`)};
   overflow: hidden;
   position: absolute;
-  z-index: 5;
   top: 0;
+  z-index: 5;
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
   &.player-home {
     width: 420px;
     height: 236px;
-    top: 600px;
+    top: calc(100vh - 30px);
     left: calc(100% - 470px);
     box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
+    @media (min-height: 1000px) {
+      top: calc(100px - 30px);
+    }
     @media (max-width: 1080px) {
-      top: 600px;
       left: calc(100% - 460px);
     }
     @media (max-width: 768px) {
-      top: 760px;
+      top: calc(100vh + 130px);
       left: calc((100% - 420px) * 0.5);
     }
     @media (max-width: 480px) {
-      top: 660px;
+      top: calc(100vh + 150px);
       left: calc((100% - 420px) * 0.5);
     }
     .remote-control {

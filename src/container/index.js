@@ -1,6 +1,7 @@
 export { default as Header } from './header'
 export { default as Catalog } from './catalog'
 export { default as Hero } from './hero'
+export { default as Slider } from './slider'
 export { default as Player } from './player'
 export { default as Playlists } from './playlists'
 export { default as Videolists } from './videolists'

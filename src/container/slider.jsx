@@ -3,11 +3,14 @@ import styled from 'styled-components'
 import { slides } from '../config'
 
 // styles
-const StyledSlider = styled.div`
+const StyledSlider = styled.section`
   position: relative;
   width: 100%;
   height: calc(100vh + 200px);
-  max-height: 1000px;
+  min-height: 800px;
+  @media (min-height: 1000px) {
+    height: 1000px;
+  }
   img {
     &.slide {
       position: absolute;
