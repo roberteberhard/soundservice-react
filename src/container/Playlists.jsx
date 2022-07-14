@@ -7,6 +7,7 @@ import { IconBeachbus, IconSose, IconArrow } from '../assets/icons'
 import { useAxios } from '../hooks'
 
 const StyledPlaylistsSection = styled.section`
+  display: none;
   width: 100%;
   height: auto;
   background-color: ${props => (props.page === 'home' ? '#f1f1f1' : '#282828')};

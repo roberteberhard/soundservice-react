@@ -5,9 +5,7 @@ import { Header, Footer } from '../container'
 
 // styled
 const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  overflow: hidden;
 `
 
 // markup

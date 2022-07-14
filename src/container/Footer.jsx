@@ -8,6 +8,7 @@ import { socials, email, year } from '../config'
 // styles
 const StyledFooterSection = styled.footer`
   display: block;
+  display: none;
   margin: 0;
   overflow: hidden;
   width: 100%;

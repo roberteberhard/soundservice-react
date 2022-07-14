@@ -7,24 +7,21 @@ import { IconLogo } from '../assets/icons'
 const StyledHeaderSection = styled.header`
   width: 100%;
   height: 0;
-  background-color: transparent;
 `
 
 const StyledHeaderContent = styled.nav`
-  padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
+  padding: 0 var(--pad-lg) 0 var(--pad-lg);
   @media (max-width: 1080px) {
-    padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
+    padding: 0 var(--pad-md) 0 var(--pad-md);
   }
   @media (max-width: 768px) {
-    padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
+    padding: 0 var(--pad-sm) 0 var(--pad-sm);
   }
 `
 
 const StyledHeaderInner = styled.div`
-  display: flex;
-  flex-direction: column;
   position: relative;
-  z-index: 10;
+  z-index: 5;
   top: 36px;
   width: 100%;
   height: 48px;

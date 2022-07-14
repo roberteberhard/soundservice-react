@@ -32,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     width: 100%;
     min-height: 100%;
-    overflow-x: hidden;
     color: var(--text-color);
     font-family: var(--font-sans);
     font-size: var(--fz-md);

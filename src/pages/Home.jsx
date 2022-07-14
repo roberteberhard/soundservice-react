@@ -5,9 +5,7 @@ import { Layout } from '../layout'
 import { Hero, Catalog, Playlists } from '../container'
 
 // styles
-const StyledMainContainer = styled.main`
-  display: grid;
-`
+const StyledMainContainer = styled.main``
 
 // markup
 const Home = () => {

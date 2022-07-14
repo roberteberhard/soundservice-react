@@ -4,10 +4,10 @@ import { slides } from '../config'
 
 // styles
 const StyledSlider = styled.div`
-  display: flex;
   position: relative;
   width: 100%;
   height: calc(100vh + 200px);
+  max-height: 1000px;
   img {
     &.slide {
       position: absolute;
