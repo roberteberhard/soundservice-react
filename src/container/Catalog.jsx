@@ -12,18 +12,18 @@ const StyledCatalogSection = styled.section`
   z-index: 1;
   margin-top: -400px;
   width: 100%;
-  height: 480px;
+  height: 500px;
   color: var(--text-color);
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
   background-color: transparent;
-  @media (max-width: 768px) {
-    height: 640px;
+  @media screen and (max-width: 768px) {
+    height: 650px;
   }
-  @media (max-width: 480px) {
-    height: 620px;
+  @media screen and (max-width: 480px) {
+    height: 640px;
   }
 `
 
@@ -38,14 +38,14 @@ const StyledEmptyJesus = styled.div`
   background-repeat: no-repeat;
   background-position: 0 0;
   background-image: url(${images.jesus});
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     left: calc(100% - 490px);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     top: 180px;
     left: calc((100% - 480px) * 0.5);
   }
-  @media (max-width: 480px) {
+  @media screen and (max-width: 480px) {
     top: 200px;
     left: calc((100% - 420px) * 0.5);
   }
@@ -54,27 +54,30 @@ const StyledEmptyJesus = styled.div`
 const StyledPlayerNavi = styled.nav`
   position: absolute;
   z-index: 4;
-  top: 410px;
+  top: 405px;
   left: calc(100% - 470px);
   display: flex;
   justify-content: space-between;
   width: 420px;
-  height: 30px;
-  @media (max-width: 1080px) {
-    top: 380px;
+  height: 36px;
+  @media screen and (max-width: 1080px) {
+    top: 405px;
     left: calc(100% - 460px);
   }
-  @media (max-width: 768px) {
-    top: 540px;
+  @media screen and (max-width: 768px) {
+    top: 550px;
     left: calc((100% - 420px) * 0.5);
   }
-  @media (max-width: 480px) {
-    top: 440px;
-    left: calc((100% - 420px) * 0.5);
+  @media screen and (max-width: 480px) {
+    top: 550px;
+    left: 20px;
+    width: calc(100% - 40px);
   }
   .player-controls {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: ${props => (props.hasPlayer === '' ? `var(--text-color)` : `var(--white)`)};
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
@@ -82,12 +85,14 @@ const StyledPlayerNavi = styled.nav`
     letter-spacing: 0px;
     .btn {
       cursor: pointer;
-      display: inline-block;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       width: 62px;
-      height: 30px;
+      height: 36px;
       pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
-      padding: 7px 0 6px;
-      border-radius: 15px;
+      border-radius: 18px;
       transition: var(--transition);
       background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
       box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};
@@ -108,12 +113,14 @@ const StyledPlayerNavi = styled.nav`
     letter-spacing: 0px;
     .btn {
       cursor: pointer;
-      display: inline-block;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       width: 62px;
-      height: 30px;
+      height: 36px;
       pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
-      padding: 7px 0 6px;
-      border-radius: 15px;
+      border-radius: 18px;
       transition: var(--transition);
       background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
       box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};

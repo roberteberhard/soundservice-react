@@ -8,7 +8,8 @@ const StyledSlider = styled.section`
   width: 100%;
   height: calc(100vh + 200px);
   min-height: 800px;
-  @media (min-height: 1000px) {
+
+  @media screen and (min-height: 1000px) {
     height: 1000px;
   }
   img {

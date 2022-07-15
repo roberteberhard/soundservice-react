@@ -9,14 +9,15 @@ import { useAxios } from '../hooks'
 const StyledPlaylistsSection = styled.section`
   width: 100%;
   height: auto;
+  margin-top: ${props => (props.page === 'home' ? '-1px' : '0px')};
   background-color: ${props => (props.page === 'home' ? '#f1f1f1' : '#282828')};
 `
 const StyledPlaylistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
   }
 `
@@ -30,7 +31,7 @@ const StyledPlaylistsInner = styled.div`
   /* Home */
   .playlist-header {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     .playlist-icon {
       height: 88px;
       width: 100px;
@@ -83,13 +84,13 @@ const StyledPlaylistsInner = styled.div`
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     padding-bottom: 20px;
-    @media (max-width: 1080px) {
+    @media screen and (max-width: 1080px) {
       grid-template-columns: 1fr 1fr 1fr;
     }
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 480px) {
+    @media screen and (max-width: 480px) {
       grid-template-columns: 1fr;
     }
   }

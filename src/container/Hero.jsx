@@ -13,8 +13,8 @@ const StyledHeroSection = styled.section`
   width: 100%;
   min-height: 800px;
   height: calc(100vh + 200px);
-  @media (min-height: 1000px) {
-    height: 1000px;
+  @media screen and (min-height: 990px) {
+    height: 990px;
   }
 `
 
@@ -28,10 +28,10 @@ const StyledHeroContent = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 var(--pad-lg) 200px var(--pad-sm);
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 0 var(--pad-md) 200px var(--pad-md);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0 var(--pad-sm) 200px var(--pad-sm);
   }
 `
@@ -41,10 +41,10 @@ const StyledInnerHeading = styled.div`
   width: auto;
   height: auto;
   padding: 0 40% 0 4%;
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 0 20% 0 0%;
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0;
   }
   h1.home-title {
@@ -52,15 +52,15 @@ const StyledInnerHeading = styled.div`
     line-height: 1.1;
     margin: 80px 0 30px;
     font-size: 40px;
-    @media (max-width: 1080px) {
+    @media screen and (max-width: 1080px) {
       margin: 40px 0 30px;
       font-size: 36px;
     }
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       padding-right: 0;
       font-size: 32px;
     }
-    @media (max-width: 480px) {
+    @media screen and (max-width: 480px) {
       padding-right: 0;
       font-size: 28px;
     }

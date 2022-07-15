@@ -4,10 +4,10 @@ import styled from 'styled-components'
 // styles
 const StyledImprintSection = styled.section`
   padding: 160px var(--pad-lg) var(--pad-xxl) var(--pad-lg);
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 160px var(--pad-md) var(--pad-xl) var(--pad-md);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 140px var(--pad-sm) var(--pad-lg) var(--pad-sm);
   }
 `

@@ -17,23 +17,35 @@ const StyledPlayerSection = styled.div`
   &.player-home {
     width: 420px;
     height: 236px;
-    top: calc(100vh - 35px);
+    top: calc(100vh - 50px);
     left: calc(100% - 470px);
-    box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
-    @media (min-height: 1000px) {
-      top: calc(1000px- 260px);
-    }
-    @media (max-width: 1080px) {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+    /*  https://stackoverflow.com/questions/11404744/css-media-queries-max-width-or-max-height */
+
+    @media screen and (max-width: 1080px) {
       left: calc(100% - 460px);
     }
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       top: calc(100vh + 95px);
       left: calc((100% - 420px) * 0.5);
     }
-    @media (max-width: 480px) {
+    @media screen and (max-width: 420px) {
       top: calc(100vh + 95px);
-      left: calc((100% - 420px) * 0.5);
+      left: 0;
+      width: 100%;
     }
+
+    @media screen and (min-height: 990px) {
+      top: calc(990px - 236px);
+      border: 2px solid red;
+    }
+
+    @media screen and (max-width: 1080px) and (min-height: 990px) {
+      top: calc(990px - 241px);
+      border: 2px solid yellow;
+    }
+
     .remote-control {
       display: none;
     }

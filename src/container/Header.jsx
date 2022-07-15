@@ -11,10 +11,10 @@ const StyledHeaderSection = styled.header`
 
 const StyledHeaderContent = styled.nav`
   padding: 0 var(--pad-lg) 0 var(--pad-lg);
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 0 var(--pad-md) 0 var(--pad-md);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0 var(--pad-sm) 0 var(--pad-sm);
   }
 `

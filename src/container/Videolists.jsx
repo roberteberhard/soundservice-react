@@ -15,10 +15,10 @@ const StyledVideolistsSection = styled.section`
 `
 const StyledVideolistsContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
-  @media (max-width: 1080px) {
+  @media screen and (max-width: 1080px) {
     padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
   }
 `
@@ -66,13 +66,13 @@ const StyledVideolistsInner = styled.div`
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     padding-bottom: 20px;
-    @media (max-width: 1080px) {
+    @media screen and (max-width: 1080px) {
       grid-template-columns: 1fr 1fr 1fr;
     }
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 480px) {
+    @media screen and (max-width: 480px) {
       grid-template-columns: 1fr;
     }
   }
