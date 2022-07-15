@@ -11,6 +11,7 @@ const variables = css`
     --jetblack: #1e1e1e;
     --lightblack: #282828;
     --lightgrey: #999999;
+    --oilgrey: #999999;
     --darkgrey: #242428;
     --primary: #97d058;
     --secondary: #64a10e;

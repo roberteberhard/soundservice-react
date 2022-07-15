@@ -17,7 +17,7 @@ const StyledPlayerSection = styled.div`
   &.player-home {
     width: 420px;
     height: 236px;
-    top: calc(100vh - 30px);
+    top: calc(100vh - 65px);
     left: calc(100% - 470px);
     box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
     @media (min-height: 1000px) {
@@ -27,11 +27,11 @@ const StyledPlayerSection = styled.div`
       left: calc(100% - 460px);
     }
     @media (max-width: 768px) {
-      top: calc(100vh + 130px);
+      top: calc(100vh + 95px);
       left: calc((100% - 420px) * 0.5);
     }
     @media (max-width: 480px) {
-      top: calc(100vh + 150px);
+      top: calc(100vh + 95px);
       left: calc((100% - 420px) * 0.5);
     }
     .remote-control {

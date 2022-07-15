@@ -22,7 +22,7 @@ const DarkSpinner = styled.div`
     height: 8px;
     animation: spinner 1500ms infinite linear;
     border-radius: 0.5em;
-    box-shadow: var(--oilgrey) 1.5em 0 0 0, var(--oilgrey) 1.1em 1.1em 0 0, var(--oilgrey) 0 1.5em 0 0, var(--oilgrey) -1.1em 1.1em 0 0, var(--oilgrey) -1.5em 0 0 0, var(--oilgrey) -1.1em -1.1em 0 0, var(--oilgrey) 0 -1.5em 0 0, var(--oilgrey) 1.1em -1.1em 0 0;
+    box-shadow: var(--primary) 1.5em 0 0 0, var(--primary) 1.1em 1.1em 0 0, var(--primary) 0 1.5em 0 0, var(--primary) -1.1em 1.1em 0 0, var(--primary) -1.5em 0 0 0, var(--primary) -1.1em -1.1em 0 0, var(--primary) 0 -1.5em 0 0, var(--primary) 1.1em -1.1em 0 0;
   }
   @keyframes spinner {
     0% {

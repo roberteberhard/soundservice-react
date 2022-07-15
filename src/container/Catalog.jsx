@@ -19,8 +19,9 @@ const StyledCatalogSection = styled.section`
   background-size: cover;
   background-position: center top;
   background-color: transparent;
+  border: 2px dotted purple;
   @media (max-width: 768px) {
-    height: 600px;
+    height: 640px;
   }
   @media (max-width: 480px) {
     height: 620px;
