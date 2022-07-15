@@ -21,7 +21,7 @@ const StyledPlayerSection = styled.div`
     left: calc(100% - 470px);
     box-shadow: 0px 2px 3px rgb(0 0 0 / 50%);
     @media (min-height: 1000px) {
-      top: calc(100vh- 30px);
+      top: calc(1000px- 260px);
     }
     @media (max-width: 1080px) {
       left: calc(100% - 460px);

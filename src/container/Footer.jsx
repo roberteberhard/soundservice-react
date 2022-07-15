@@ -18,6 +18,7 @@ const StyledFooterSection = styled.footer`
     background-color: var(--jetblack);
   }
 `
+
 const StyledFooterContent = styled.div`
   padding: 0 var(--pad-lg) var(--pad-lg) var(--pad-lg);
   @media (max-width: 1080px) {
@@ -41,13 +42,26 @@ const StyledFooterBranding = styled.div`
     width: 185px;
     height: 20px;
   }
+  @media (max-width: 768px) {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+  }
 `
+
 const StyledFooterFavorites = styled.div`
   display: flex;
   flex-direction: row;
+  @media (max-width: 1080px) {
+    flex-direction: column;
+  }
   .favorites-heading {
     width: 60%;
     margin-bottom: 120px;
+    @media (max-width: 1080px) {
+      width: 100%;
+      margin-bottom: 50px;
+    }
     h3 {
       margin-bottom: 15px;
       color: var(--ghost);
@@ -56,6 +70,9 @@ const StyledFooterFavorites = styled.div`
       text-align: left;
       line-height: 1.25;
       letter-spacing: 0.5px;
+      @media (max-width: 768px) {
+        text-align: center;
+      }
     }
     p {
       color: var(--text-color);
@@ -65,6 +82,9 @@ const StyledFooterFavorites = styled.div`
       text-align: left;
       line-height: 1.25;
       letter-spacing: 0;
+      @media (max-width: 768px) {
+        text-align: center;
+      }
     }
   }
   .favorites-socials {
@@ -72,6 +92,16 @@ const StyledFooterFavorites = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     width: 40%;
+    @media (max-width: 1080px) {
+      width: 100%;
+      justify-content: flex-start;
+      margin-bottom: 80px;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
     .social-links {
       display: block;
       overflow: hidden;
@@ -105,10 +135,11 @@ const StyledFooterCopyright = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   color: var(--text-color);
-  text-align: center;
   font-family: var(--font-mono);
   font-size: var(--fz-sm);
   font-weight: 600;
+  text-align: left;
+  line-height: 1.5;
   a {
     cursor: pointer;
     color: var(--primary);
@@ -117,9 +148,16 @@ const StyledFooterCopyright = styled.nav`
       color: var(--secondary);
     }
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
   .footer-copyright {
     .strong {
       font-weight: 900;
+    }
+    @media (max-width: 768px) {
+      text-align: center;
+      margin-bottom: 20px;
     }
   }
   .footer-policy {
@@ -127,6 +165,10 @@ const StyledFooterCopyright = styled.nav`
       display: inline-block;
       margin: 0 8px;
       font-size: var(--fz-xxs);
+    }
+    @media (max-width: 768px) {
+      text-align: center;
+      margin-bottom: 10px;
     }
   }
 `
@@ -170,7 +212,7 @@ const Footer = () => {
           </StyledFooterFavorites>
           <StyledFooterCopyright>
             <div className="footer-copyright">
-              <span className="strong">© SOUNDSERVICE {year}</span>{' '}
+              <span className="strong"> {year} © SOUNDSERVICE</span>{' '}
               <span className="designed-by">
                 - Designed and built by{' '}
                 <a href="https://roberteberhard.com" target="_blank" rel="noopener noreferrer">
