@@ -55,14 +55,14 @@ const StyledImprintInner = styled.div`
     }
   }
   p {
-    color: var(--lightgrey);
+    color: var(--text-color);
     &.strong {
       font-weight: 600;
     }
   }
   ul {
     padding-left: 30px;
-    color: var(--lightgrey);
+    color: var(--text-color);
     li {
       margin-bottom: 10px;
       padding-left: 6px;

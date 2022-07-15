@@ -10,12 +10,10 @@ const variables = css`
     --black: #000000;
     --jetblack: #1e1e1e;
     --lightblack: #282828;
-    --lightgrey: #999999;
-    --oilgrey: #999999;
     --darkgrey: #242428;
     --primary: #97d058;
     --secondary: #64a10e;
-    --text-color: #4a4a4a;
+    --text-color: #999999;
 
     --font-sans: 'MuseoRounded', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
     --font-mono: Courier, 'Courier New', 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;

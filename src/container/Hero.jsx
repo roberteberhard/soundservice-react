@@ -16,6 +16,7 @@ const StyledHeroSection = styled.section`
   @media (min-height: 1000px) {
     height: 1000px;
   }
+  border: 1px dotted red;
 `
 
 const StyledHeroContent = styled.div`

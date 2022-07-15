@@ -19,7 +19,6 @@ const StyledCatalogSection = styled.section`
   background-size: cover;
   background-position: center top;
   background-color: transparent;
-  border: 2px dotted purple;
   @media (max-width: 768px) {
     height: 640px;
   }
@@ -55,7 +54,7 @@ const StyledEmptyJesus = styled.div`
 const StyledPlayerNavi = styled.nav`
   position: absolute;
   z-index: 4;
-  top: 380px;
+  top: 410px;
   left: calc(100% - 470px);
   display: flex;
   justify-content: space-between;
@@ -76,16 +75,22 @@ const StyledPlayerNavi = styled.nav`
   .player-controls {
     display: flex;
     flex-direction: row;
-    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--white)`)};
+    color: ${props => (props.hasPlayer === '' ? `var(--text-color)` : `var(--white)`)};
     font-family: var(--font-mono);
-    font-size: var(--fz-md);
+    font-size: var(--fz-sm);
     font-weight: 600;
+    letter-spacing: 0px;
     .btn {
       cursor: pointer;
+      display: inline-block;
+      width: 62px;
+      height: 30px;
       pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
-      padding: 5px 10px;
+      padding: 7px 0 6px;
+      border-radius: 15px;
       transition: var(--transition);
       background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
+      box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};
       &:hover,
       &:focus {
         background-color: var(--secondary);
@@ -96,18 +101,25 @@ const StyledPlayerNavi = styled.nav`
     }
   }
   .player-backwards {
-    color: ${props => (props.hasPlayer === '' ? `var(--lightgrey)` : `var(--darkgrey)`)};
+    color: ${props => (props.hasPlayer === '' ? `var(--text-color)` : `var(--white)`)};
     font-family: var(--font-mono);
-    font-size: var(--fz-md);
+    font-size: var(--fz-sm);
     font-weight: 600;
+    letter-spacing: 0px;
     .btn {
       cursor: pointer;
+      display: inline-block;
+      width: 62px;
+      height: 30px;
       pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
-      padding: 5px 10px;
+      padding: 7px 0 6px;
+      border-radius: 15px;
       transition: var(--transition);
+      background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
+      box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};
       &:hover,
       &:focus {
-        color: var(--secondary);
+        background-color: var(--secondary);
       }
     }
   }
@@ -144,7 +156,7 @@ const Catalog = () => {
         </div>
         <div className="player-backwards">
           <div className="btn" onClick={() => onBackClick()}>
-            Back to Track
+            Back
           </div>
         </div>
       </StyledPlayerNavi>

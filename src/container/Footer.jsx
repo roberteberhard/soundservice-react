@@ -7,10 +7,8 @@ import { socials, email, year } from '../config'
 
 // styles
 const StyledFooterSection = styled.footer`
-  display: block;
-  display: none;
-  margin: 0;
   overflow: hidden;
+  margin: 0;
   width: 100%;
   min-height: 400px;
   background-color: var(--jetblack);
@@ -57,11 +55,16 @@ const StyledFooterFavorites = styled.div`
       font-weight: 900;
       text-align: left;
       line-height: 1.25;
+      letter-spacing: 0.5px;
     }
     p {
-      color: var(--lightgrey);
+      color: var(--text-color);
+      font-family: var(--font-mono);
+      font-size: var(--fz-md);
+      font-weight: 600;
       text-align: left;
       line-height: 1.25;
+      letter-spacing: 0;
     }
   }
   .favorites-socials {
@@ -101,7 +104,8 @@ const StyledFooterCopyright = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: var(--ghost);
+  color: var(--text-color);
+  text-align: center;
   font-family: var(--font-mono);
   font-size: var(--fz-sm);
   font-weight: 600;

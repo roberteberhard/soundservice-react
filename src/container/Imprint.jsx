@@ -55,7 +55,7 @@ const StyledImprintInner = styled.div`
     }
   }
   p {
-    color: var(--lightgrey);
+    color: var(--text-color);
     &.strong {
       font-weight: 600;
     }
