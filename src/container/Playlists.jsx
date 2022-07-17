@@ -27,7 +27,7 @@ const StyledPlaylistsInner = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--max-size);
   /* Home */
   .playlist-header {
     width: 100%;

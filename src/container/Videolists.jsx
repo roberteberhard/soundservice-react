@@ -10,7 +10,6 @@ import { useAxios } from '../hooks'
 const StyledVideolistsSection = styled.section`
   width: 100%;
   min-height: 400px;
-  margin-top: 100vh;
   background-color: var(--jetblack);
 `
 const StyledVideolistsContent = styled.div`
@@ -28,7 +27,7 @@ const StyledVideolistsInner = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--max-size);
   .videolist-header {
     display: flex;
     flex-direction: row;
@@ -81,6 +80,7 @@ const StyledVideolistsInner = styled.div`
 // markup
 const Videolists = () => {
   const [posts, error, loading, axiosFetch] = useAxios()
+  const [positionY, setPositionY] = useState(0)
   const [listIndex, setListIndex] = useState(0)
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
@@ -124,6 +124,20 @@ const Videolists = () => {
       appNextTrack('')
     }
   }
+
+  const handleResize = () => {
+    const windowH = window.innerHeight
+    setPositionY(windowH > 720 ? 720 : windowH)
+  }
+
+  useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     if (slug) getData()
@@ -188,7 +202,7 @@ const Videolists = () => {
   )
 
   return (
-    <StyledVideolistsSection>
+    <StyledVideolistsSection style={{ paddingTop: positionY }}>
       <StyledVideolistsContent>
         <StyledVideolistsInner>
           {VideolistHeader}
