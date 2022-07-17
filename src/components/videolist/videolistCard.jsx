@@ -11,6 +11,65 @@ const StyledVideolistCard = styled.div`
   overflow: hidden;
   background-color: var(--lightblack);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  .videocard-link {
+    display: block;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      .videocard-ctrl {
+        opacity: 1;
+        border: 2px solid var(--white);
+        svg.icon-play {
+          .play-circle,
+          .play-arrow {
+            fill: var(--white);
+          }
+        }
+      }
+    }
+    .videocard-ctrl {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: var(--transition);
+      border: 2px solid var(--primary);
+      background-color: rgba(0, 0, 0, 0.32);
+      svg.icon-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        transform: translate(-21px, -21px);
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        .play-circle,
+        .play-arrow {
+          fill: var(--white);
+        }
+      }
+    }
+    .videocard-desc {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 15px;
+      font-family: var(--font-sans);
+      &__title {
+        margin: 0 0 4px;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+      &__artist {
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.15;
+      }
+    }
+  }
   &.active {
     .videocard-link {
       .videocard-ctrl {
@@ -25,21 +84,7 @@ const StyledVideolistCard = styled.div`
           }
         }
       }
-    }
-  }
-  &.playing {
-    .videocard-link {
-      .videocard-ctrl {
-        border: solid 2px var(--primary);
-        svg.icon-play {
-          .play-circle,
-          .play-arrow {
-            fill: transparent;
-          }
-        }
-      }
       .videocard-eqlizr {
-        opacity: 1;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -78,88 +123,56 @@ const StyledVideolistCard = styled.div`
       }
     }
   }
-  &:hover {
-    .videocard-link {
-      .videocard-ctrl {
-        opacity: 1;
-      }
-    }
-  }
-  .videocard-link {
-    display: block;
-    cursor: pointer;
-    .videocard-ctrl {
-      opacity: 0;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transition: var(--transition);
-      border: 2px solid var(--primary);
-      background-color: rgba(0, 0, 0, 0.32);
-      svg.icon-play {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 2;
-        transform: translate(-21px, -21px);
-        display: inline-block;
-        width: 42px;
-        height: 42px;
-        .play-circle,
-        .play-arrow {
-          fill: var(--white);
-        }
-      }
-    }
-    .video-eqlizr {
-      opacity: 0;
-      transition: opacity 0.5s var(--easing);
-    }
-    .videocard-desc {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      padding: 15px;
-      font-family: var(--font-sans);
-      &__title {
-        margin: 0 0 4px;
-        font-size: 16px;
-        font-weight: 900;
-        letter-spacing: 0;
-      }
-      &__artist {
-        color: var(--white);
-        font-size: 13px;
-        font-weight: 500;
-        line-height: 1.15;
-      }
-    }
-  }
 `
 
 // markup
 const VideolistCard = ({ ...post }) => {
-  const { playlistSlug, playlistTrack } = useShop()
+  const { playlistSlug, playlistTrack, trackIsPlaying, appPlayPauseTrack } = useShop()
+
+  const onPlayPauseClick = () => {
+    trackIsPlaying ? appPlayPauseTrack('pause') : appPlayPauseTrack('play')
+  }
 
   return (
     <StyledVideolistCard className={playlistTrack === post.track ? 'active' : ''}>
-      <Link to={`/track/${playlistSlug}/${post.track}`}>
-        <div className="videocard-link">
-          <div className="videocard-ctrl">
-            <IconPlay />
-          </div>
-          <div className="videocard-eqlizr">
-            <span className="bar bar-1"></span>
-            <span className="bar bar-2"></span>
-            <span className="bar bar-3"></span>
-          </div>
+      {playlistTrack === post.track ? (
+        <div
+          className="videocard-link"
+          onClick={() => {
+            onPlayPauseClick()
+          }}
+        >
+          {trackIsPlaying ? (
+            <div className="videocard-ctrl">
+              <div className="videocard-eqlizr">
+                <span className="bar bar-1"></span>
+                <span className="bar bar-2"></span>
+                <span className="bar bar-3"></span>
+              </div>
+            </div>
+          ) : (
+            <div className="videocard-ctrl">
+              <IconPlay />
+            </div>
+          )}
           <div className="videocard-desc">
             <h2 className="videocard-desc__title">{post.title}</h2>
             <p className="videocard-desc__artist">{post.artist}</p>
           </div>
           <img src={post.thumb} width="100%" height="100%" alt={post.title} />
         </div>
-      </Link>
+      ) : (
+        <Link className="videocard-link" to={`/track/${playlistSlug}/${post.track}`}>
+          <div className="videocard-ctrl">
+            <IconPlay />
+          </div>
+          <div className="videocard-desc">
+            <h2 className="videocard-desc__title">{post.title}</h2>
+            <p className="videocard-desc__artist">{post.artist}</p>
+          </div>
+          <img src={post.thumb} width="100%" height="100%" alt={post.title} />
+        </Link>
+      )}
     </StyledVideolistCard>
   )
 }

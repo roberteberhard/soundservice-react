@@ -85,7 +85,7 @@ const Videolists = () => {
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
   const [activeTrack, setActiveTrack] = useState('Track')
-  const { playlistTrack, appTrackId, appNextTrack } = useShop()
+  const { playlistTrack,  appTrackId, appNextTrack } = useShop()
   const { slug } = useParams()
 
   const getData = () => {

@@ -15,6 +15,7 @@ const Index = () => {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
+          <Player />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/track/:slug/:track" element={<Track />} />
@@ -22,7 +23,6 @@ const Index = () => {
             <Route path="/legal" element={<Legal />} />
             <Route path="*" component={<Error />} />
           </Routes>
-          <Player />
         </ThemeProvider>
       </BrowserRouter>
     </AppProvider>

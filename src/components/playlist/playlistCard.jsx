@@ -14,6 +14,7 @@ const StyledPlaylistCard = styled.article`
   &.active {
     .playlist-ctrl {
       opacity: 1;
+      border-color: var(--primary);
       svg.icon-active {
         display: inline-block;
         position: absolute;
@@ -36,7 +37,7 @@ const StyledPlaylistCard = styled.article`
     width: 100%;
     height: 100%;
     transition: var(--transition);
-    border: 2px solid var(--primary);
+    border: 2px solid var(--white);
     background-color: rgba(0, 0, 0, 0.32);
     svg.icon-play {
       position: absolute;
@@ -49,7 +50,7 @@ const StyledPlaylistCard = styled.article`
       height: 42px;
       .play-circle,
       .play-arrow {
-        fill: var(--primary);
+        fill: var(--white);
       }
     }
   }
