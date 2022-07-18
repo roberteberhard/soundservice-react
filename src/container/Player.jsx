@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { IconPlayerPlay, IconPlayerPause, IconPlayerNext } from '../assets/icons'
 
 // styles
 const StyledOuterWrapper = styled.div`
@@ -70,12 +71,42 @@ const StyledInnerWrapper = styled.div`
   }
 `
 
+const StyledRemoteControl = styled.div`
+  .remote-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 55;
+    top: calc(100vh - 92px);
+    left: 40px;
+    font-size: 0;
+    .play,
+    .pause,
+    .next {
+      cursor: pointer;
+      display: block;
+      opacity: 0.85;
+      margin-left: 8px;
+      width: 54px;
+      height: 36px;
+      border-radius: 18px;
+      background-color: transparent;
+      transition: var(--transition);
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+`
+
 // markup
 const Player = () => {
   const [videoId, setVideoId] = useState('')
   const [positions, setPositions] = useState({ x: 0, y: 0 })
   const [dimensions, setDimensions] = useState({ height: window.innerHeight, width: window.innerWidth })
-  const { playlistSlug, trackId, nextTrack, playPauseTrack, pageView, appTrackIsPlaying } = useShop()
+  const { playlistSlug, trackId, nextTrack, trackIsPlaying, playPauseTrack, pageView, appTrackIsPlaying } = useShop()
   const refPlayer = useRef(null)
   const navigate = useNavigate()
 
@@ -144,9 +175,9 @@ const Player = () => {
     refPlayer.current.internalPlayer.pauseVideo()
   }
 
-  /*   const onNextClick = () => {
+  const onNextClick = () => {
     navigate(`/track/${playlistSlug}/${nextTrack}`)
-  } */
+  }
 
   useEffect(() => {
     handleResize()
@@ -169,6 +200,22 @@ const Player = () => {
   return (
     <StyledOuterWrapper hasPlayer={playlistSlug} className={`player-${pageView}`} dimensions={dimensions}>
       <StyledInnerWrapper pageView={pageView} positions={positions} dimensions={dimensions}>
+        <StyledRemoteControl>
+          <div className="remote-control">
+            {trackIsPlaying ? (
+              <button className="pause" onClick={() => onPauseClick()}>
+                <IconPlayerPause />
+              </button>
+            ) : (
+              <button className="play" onClick={() => onPlayClick()}>
+                <IconPlayerPlay />
+              </button>
+            )}
+            <button className="next" onClick={() => onNextClick()}>
+              <IconPlayerNext />
+            </button>
+          </div>
+        </StyledRemoteControl>
         <YouTube className="video-player" ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onPlay={onPlay} onPause={onPause} onEnd={onEnd} onError={onError} />
       </StyledInnerWrapper>
     </StyledOuterWrapper>

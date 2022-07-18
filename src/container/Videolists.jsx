@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import axios from '../apis/playlists'
 import useShop from '../context/AppContext'
 import { VideolistCard, NetworkEmpty, NetworkSpinner, NetworkError } from '../components'
-import { IconArrow, IconSose } from '../assets/icons'
+import { IconArrow, IconSose, IconSeparatorUp } from '../assets/icons'
 import { useParams } from 'react-router-dom'
 import { useAxios } from '../hooks'
 
@@ -11,14 +11,18 @@ const StyledVideolistsSection = styled.section`
   width: 100%;
   min-height: 400px;
   background-color: var(--jetblack);
+  .separator {
+    height: 40px;
+    background-color: var(--lightblack);
+  }
 `
 const StyledVideolistsContent = styled.div`
-  padding: 0 var(--pad-lg) var(--pad-xxl) var(--pad-lg);
+  padding: 0 var(--pad-lg) var(--pad-lg) var(--pad-lg);
   @media screen and (max-width: 1080px) {
-    padding: 0 var(--pad-md) var(--pad-xl) var(--pad-md);
+    padding: 0 var(--pad-md) var(--pad-md) var(--pad-md);
   }
   @media screen and (max-width: 768px) {
-    padding: 0 var(--pad-sm) var(--pad-lg) var(--pad-sm);
+    padding: 0 var(--pad-sm) var(--pad-sm) var(--pad-sm);
   }
 `
 
@@ -85,7 +89,7 @@ const Videolists = () => {
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
   const [activeTrack, setActiveTrack] = useState('Track')
-  const { playlistTrack,  appTrackId, appNextTrack } = useShop()
+  const { playlistTrack, appTrackId, appNextTrack } = useShop()
   const { slug } = useParams()
 
   const getData = () => {
@@ -209,6 +213,7 @@ const Videolists = () => {
           {VideolistCards}
         </StyledVideolistsInner>
       </StyledVideolistsContent>
+      <IconSeparatorUp />
     </StyledVideolistsSection>
   )
 }

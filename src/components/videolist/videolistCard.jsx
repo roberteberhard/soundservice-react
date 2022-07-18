@@ -10,7 +10,7 @@ const StyledVideolistCard = styled.div`
   position: relative;
   overflow: hidden;
   background-color: var(--lightblack);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(50, 50, 93, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px;
   .videocard-link {
     display: block;
     cursor: pointer;
