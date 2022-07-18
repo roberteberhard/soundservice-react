@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
-import { IconPlayerPlay, IconPlayerPause, IconPlayerNext } from '../assets/icons'
+import { IconPlayerPlay, IconPlayerPause, IconPlayerNext, IconReferalAmazon, IconReferalGoogle, IconReferalApple, IconReferalYoutube, IconReferalSpotify } from '../assets/icons'
 
 // styles
 const StyledOuterWrapper = styled.div`
@@ -72,31 +72,59 @@ const StyledInnerWrapper = styled.div`
 `
 
 const StyledRemoteControl = styled.div`
-  .remote-control {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    z-index: 55;
-    top: calc(100vh - 92px);
-    left: 40px;
-    font-size: 0;
-    .play,
-    .pause,
-    .next {
-      cursor: pointer;
-      display: block;
-      opacity: 0.85;
-      margin-left: 8px;
-      width: 54px;
-      height: 36px;
-      border-radius: 18px;
-      background-color: transparent;
-      transition: var(--transition);
-      &:hover {
-        opacity: 1;
-      }
+  position: absolute;
+  z-index: 10;
+  top: ${props => props.dimensions.height - 93 + 'px'};
+  left: var(--pad-lg);
+  @media screen and (max-width: 1080px) {
+    left: var(--pad-md);
+  }
+  @media screen and (max-width: 768px) {
+    left: var(--pad-sm);
+  }
+  display: flex;
+  flex-direction: row;
+  .play,
+  .pause,
+  .next {
+    cursor: pointer;
+    display: block;
+    opacity: 0.85;
+    margin-right: 8px;
+    width: 54px;
+    height: 36px;
+    border-radius: 18px;
+    background-color: transparent;
+    transition: var(--transition);
+    &:hover {
+      opacity: 1;
+    }
+  }
+`
+
+const StyledPartnerLinks = styled.div`
+  position: absolute;
+  z-index: 10;
+  top: ${props => props.dimensions.height - 89 + 'px'};
+  right: var(--pad-lg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  height: 28px;
+  a.brand {
+    cursor: pointer;
+    display: block;
+    opacity: 0.85;
+    width: 28px;
+    height: 28px;
+    margin-left: 15px;
+    transition: var(--transition);
+    &:hover {
+      opacity: 1;
+    }
+    &.apple {
+      margin-top: -4px;
     }
   }
 `
@@ -200,22 +228,37 @@ const Player = () => {
   return (
     <StyledOuterWrapper hasPlayer={playlistSlug} className={`player-${pageView}`} dimensions={dimensions}>
       <StyledInnerWrapper pageView={pageView} positions={positions} dimensions={dimensions}>
-        <StyledRemoteControl>
-          <div className="remote-control">
-            {trackIsPlaying ? (
-              <button className="pause" onClick={() => onPauseClick()}>
-                <IconPlayerPause />
-              </button>
-            ) : (
-              <button className="play" onClick={() => onPlayClick()}>
-                <IconPlayerPlay />
-              </button>
-            )}
-            <button className="next" onClick={() => onNextClick()}>
-              <IconPlayerNext />
+        <StyledRemoteControl dimensions={dimensions}>
+          {trackIsPlaying ? (
+            <button className="pause" onClick={() => onPauseClick()}>
+              <IconPlayerPause />
             </button>
-          </div>
+          ) : (
+            <button className="play" onClick={() => onPlayClick()}>
+              <IconPlayerPlay />
+            </button>
+          )}
+          <button className="next" onClick={() => onNextClick()}>
+            <IconPlayerNext />
+          </button>
         </StyledRemoteControl>
+        <StyledPartnerLinks dimensions={dimensions}>
+          <a className="brand amazon" href="activeVideolist.amazon" target="_blank">
+            <IconReferalAmazon />
+          </a>
+          <a className="brand youtube" href="activeVideolist.amazon" target="_blank">
+            <IconReferalYoutube />
+          </a>
+          <a className="brand apple" href="activeVideolist.amazon" target="_blank">
+            <IconReferalApple />
+          </a>
+          <a className="brand google" href="activeVideolist.amazon" target="_blank">
+            <IconReferalGoogle />
+          </a>
+          <a className="brand spotify" href="activeVideolist.amazon" target="_blank">
+            <IconReferalSpotify />
+          </a>
+        </StyledPartnerLinks>
         <YouTube className="video-player" ref={refPlayer} videoId={videoId} opts={opts} onReady={onReady} onPlay={onPlay} onPause={onPause} onEnd={onEnd} onError={onError} />
       </StyledInnerWrapper>
     </StyledOuterWrapper>

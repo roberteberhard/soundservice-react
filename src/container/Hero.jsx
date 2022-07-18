@@ -27,7 +27,7 @@ const StyledHeroContent = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  padding: 0 var(--pad-lg) 200px var(--pad-sm);
+  padding: 0 var(--pad-lg) 200px var(--pad-lg);
   @media screen and (max-width: 1080px) {
     padding: 0 var(--pad-md) 200px var(--pad-md);
   }
