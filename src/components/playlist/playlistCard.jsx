@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import useShop from '../../context/AppContext'
 import { Link } from 'react-router-dom'
+import { images } from '../../constants'
+import { LazyImage } from 'react-lazy-images'
 import { IconPlay, IconActive } from '../../assets/icons'
 
 // styles
@@ -9,8 +11,8 @@ const StyledPlaylistCard = styled.article`
   display: block;
   position: relative;
   overflow: hidden;
-  background-color: var(--white);
-  /*  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
+  background-color: var(--jetblack);
+  background-color: ${props => (props.page === 'home' ? '#ccc' : 'var(--jetblack)')};
   box-shadow: rgba(50, 50, 93, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px;
   &.active {
     .playlist-ctrl {
@@ -117,10 +119,10 @@ const StyledPlaylistCard = styled.article`
 // markup
 const PlaylistCard = ({ ...post }) => {
   const genres = post.genre.slice(0, 3)
-  const { playlistSlug } = useShop()
+  const { playlistSlug, pageView } = useShop()
 
   return (
-    <StyledPlaylistCard className={playlistSlug === post.slug ? 'active' : ''}>
+    <StyledPlaylistCard className={playlistSlug === post.slug ? 'active' : ''} page={pageView}>
       <Link to={`/track/${post.slug}/${post.track}`}>
         <div className="playlist-ctrl">{playlistSlug === post.slug ? <IconActive /> : <IconPlay />}</div>
         <div className="playlist-tracks">
@@ -138,7 +140,7 @@ const PlaylistCard = ({ ...post }) => {
               ))}
           </div>
         </div>
-        <img src={post.card} width="100%" height="100%" alt={post.title} />
+        <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.placeholder} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
       </Link>
     </StyledPlaylistCard>
   )

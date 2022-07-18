@@ -74,11 +74,11 @@ const StyledPlayerNavi = styled.nav`
     width: calc(100% - 40px);
   }
   .player-controls {
-    display: flex;
+    display: ${props => (props.hasPlayer === '' ? `none` : `flex`)};
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: ${props => (props.hasPlayer === '' ? `var(--text-color)` : `var(--white)`)};
+    color: var(--white);
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
     font-weight: 600;
@@ -91,11 +91,10 @@ const StyledPlayerNavi = styled.nav`
       align-items: center;
       width: 62px;
       height: 36px;
-      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
       border-radius: 18px;
       transition: var(--transition);
-      background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
-      box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};
+      background: var(--lightblack);
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       &:hover,
       &:focus {
         background-color: var(--secondary);
@@ -106,7 +105,8 @@ const StyledPlayerNavi = styled.nav`
     }
   }
   .player-backwards {
-    color: ${props => (props.hasPlayer === '' ? `var(--text-color)` : `var(--white)`)};
+    display: ${props => (props.hasPlayer === '' ? `none` : `block`)};
+    color: var(--white);
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
     font-weight: 600;
@@ -119,11 +119,10 @@ const StyledPlayerNavi = styled.nav`
       align-items: center;
       width: 62px;
       height: 36px;
-      pointer-events: ${props => (props.hasPlayer === '' ? `none` : `auto`)};
       border-radius: 18px;
       transition: var(--transition);
-      background: ${props => (props.hasPlayer === '' ? `transparent` : `var(--lightblack)`)};
-      box-shadow: ${props => (props.hasPlayer === '' ? `none` : `rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px`)};
+      background: var(--lightblack);
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       &:hover,
       &:focus {
         background-color: var(--secondary);
@@ -143,7 +142,6 @@ const Catalog = () => {
   const onNextClick = () => {
     navigate(`/track/${playlistSlug}/${nextTrack}`)
   }
-
   const onBackClick = () => {
     navigate(`/track/${playlistSlug}/${playlistTrack}`)
   }

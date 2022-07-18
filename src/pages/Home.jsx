@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useShop from '../context/AppContext'
 import { Helmet } from 'react-helmet'
 import { Layout } from '../layout'
-import { Slider, Hero } from '../container'
+import { Slider, Hero, Catalog, Playlists } from '../container'
 
 // styles
 const StyledMainContainer = styled.main``
@@ -26,6 +26,8 @@ const Home = () => {
       <StyledMainContainer>
         <Slider />
         <Hero />
+        <Catalog />
+        <Playlists />
       </StyledMainContainer>
     </Layout>
   )
