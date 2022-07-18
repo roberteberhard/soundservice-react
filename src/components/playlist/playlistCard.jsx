@@ -140,7 +140,7 @@ const PlaylistCard = ({ ...post }) => {
               ))}
           </div>
         </div>
-        <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.placeholder} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
+        <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.playlist} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
       </Link>
     </StyledPlaylistCard>
   )

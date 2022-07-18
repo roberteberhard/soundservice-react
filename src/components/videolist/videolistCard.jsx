@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import useShop from '../../context/AppContext'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import { images } from '../../constants'
+import { LazyImage } from 'react-lazy-images'
 import { IconPlay } from '../../assets/icons'
 
 // styles
@@ -164,7 +166,7 @@ const VideolistCard = ({ ...post }) => {
             <h2 className="videocard-desc__title">{post.title}</h2>
             <p className="videocard-desc__artist">{post.artist}</p>
           </div>
-          <img src={post.thumb} width="100%" height="100%" alt={post.title} />
+          <LazyImage src={post.thumb} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.videolist} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
         </div>
       ) : (
         <Link className="videocard-link" to={`/track/${playlistSlug}/${post.track}`}>
@@ -175,7 +177,7 @@ const VideolistCard = ({ ...post }) => {
             <h2 className="videocard-desc__title">{post.title}</h2>
             <p className="videocard-desc__artist">{post.artist}</p>
           </div>
-          <img src={post.thumb} width="100%" height="100%" alt={post.title} />
+          <LazyImage src={post.thumb} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.videolist} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
         </Link>
       )}
     </StyledVideolistCard>
