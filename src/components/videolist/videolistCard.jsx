@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useShop from '../../context/AppContext'
+import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { IconPlay } from '../../assets/icons'
 
@@ -127,7 +128,7 @@ const StyledVideolistCard = styled.div`
 
 // markup
 const VideolistCard = ({ ...post }) => {
-  const { playlistSlug, playlistTrack, trackIsPlaying, appPlayPauseTrack } = useShop()
+  const { playlistSlug, playlistTrack, trackName, trackIsPlaying, appPlayPauseTrack } = useShop()
 
   const onPlayPauseClick = () => {
     trackIsPlaying ? appPlayPauseTrack('pause') : appPlayPauseTrack('play')
@@ -135,6 +136,10 @@ const VideolistCard = ({ ...post }) => {
 
   return (
     <StyledVideolistCard className={playlistTrack === post.track ? 'active' : ''}>
+      <Helmet>
+        <title>{trackName} - soundservice.com</title>
+        <link rel="canonical" href={`https://soundservice.com/track/${playlistSlug}/${playlistTrack}`} />
+      </Helmet>
       {playlistTrack === post.track ? (
         <div
           className="videocard-link"

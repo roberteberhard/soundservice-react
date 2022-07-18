@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { Helmet } from 'react-helmet'
 import { Layout } from '../layout'
 import { Imprint } from '../container'
 
@@ -21,6 +22,10 @@ const Legal = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Legal - soundservice.com</title>
+        <link rel="canonical" href="https://soundservice.com/legal" />
+      </Helmet>
       <StyledMainContainer>
         <Imprint />
       </StyledMainContainer>

@@ -26,12 +26,22 @@ export const AppProvider = ({ children }) => {
     })
   }
 
-  /* Add video id to state */
+  /* Add track id to state */
   const appTrackId = strTrackId => {
     dispatch({
       type: 'APP_TRACK_ID',
       payload: {
         trackId: strTrackId
+      }
+    })
+  }
+
+  /* Add track name to state */
+  const appTrackName = strTrackName => {
+    dispatch({
+      type: 'APP_TRACK_NAME',
+      payload: {
+        trackName: strTrackName
       }
     })
   }
@@ -80,6 +90,7 @@ export const AppProvider = ({ children }) => {
     playlistSlug: state.playlistSlug,
     playlistTrack: state.playlistTrack,
     trackId: state.trackId,
+    trackName: state.trackName,
     trackIsPlaying: state.trackIsPlaying,
     playPauseTrack: state.playPauseTrack,
     nextTrack: state.nextTrack,
@@ -87,6 +98,7 @@ export const AppProvider = ({ children }) => {
     appPlaylistSlug,
     appPlaylistTrack,
     appTrackId,
+    appTrackName,
     appTrackIsPlaying,
     appPlayPauseTrack,
     appNextTrack,

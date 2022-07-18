@@ -1,35 +1,31 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
-import { Helmet } from 'react-helmet'
 import { Layout } from '../layout'
+import { Slider, Hero, Catalog, Playlists } from '../container'
 
 // styles
-const StyledMainContainer = styled.main`
-  display: grid;
-`
+const StyledMainContainer = styled.main``
 
 // markup
-const Error = () => {
+const Home = () => {
   const { appPageView } = useShop()
 
   useEffect(() => {
-    appPageView('error')
+    appPageView('home')
     // eslint-disable-next-line
   }, [])
 
   return (
     <Layout>
-      <Helmet>
-        <title>404 - Soundservice.com</title>
-      </Helmet>
       <StyledMainContainer>
-        <>
-          <h5>Error</h5>
-        </>
+        <Slider />
+        <Hero />
+        <Catalog />
+        <Playlists />
       </StyledMainContainer>
     </Layout>
   )
 }
 
-export default Error
+export default Home

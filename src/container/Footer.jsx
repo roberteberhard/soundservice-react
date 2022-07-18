@@ -32,7 +32,7 @@ const StyledFooterContent = styled.div`
 const StyledInnerSection = styled.div`
   padding: 40px 0 0 0;
   &.has-player {
-    border: 2px dotted red;
+    border: none;
   }
 `
 
@@ -221,11 +221,11 @@ const Footer = () => {
               </span>
             </div>
             <div className="footer-policy">
-              <Link to={'/Privacy'} className="footer-link">
+              <Link to={'/privacy'} className="footer-link">
                 Privacy
               </Link>
               <span className="policy-spacer">•</span>
-              <Link to={'/Legal'} className="footer-link">
+              <Link to={'/legal'} className="footer-link">
                 Legal
               </Link>
             </div>

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { Helmet } from 'react-helmet'
 import { Layout } from '../layout'
-import { Slider, Hero, Catalog, Playlists } from '../container'
+import { Slider, Hero } from '../container'
 
 // styles
 const StyledMainContainer = styled.main``
@@ -18,11 +19,13 @@ const Home = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>soundservice.com</title>
+        <link rel="canonical" href="https://soundservice.com" />
+      </Helmet>
       <StyledMainContainer>
         <Slider />
         <Hero />
-        <Catalog />
-        <Playlists />
       </StyledMainContainer>
     </Layout>
   )

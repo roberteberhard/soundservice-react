@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { Helmet } from 'react-helmet'
 import { Layout } from '../layout'
 import { Policy } from '../container'
 
@@ -11,7 +12,7 @@ const StyledMainContainer = styled.main`
 `
 
 // markup
-const Legal = () => {
+const Privacy = () => {
   const { appPageView } = useShop()
 
   useEffect(() => {
@@ -21,6 +22,10 @@ const Legal = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Privacy - soundservice.com</title>
+        <link rel="canonical" href="https://soundservice.com/privacy" />
+      </Helmet>
       <StyledMainContainer>
         <Policy />
       </StyledMainContainer>
@@ -28,4 +33,4 @@ const Legal = () => {
   )
 }
 
-export default Legal
+export default Privacy

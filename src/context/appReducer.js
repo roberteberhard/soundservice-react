@@ -1,6 +1,7 @@
 export const initialState = {
   playlistSlug: '',
   playlistTrack: '',
+  trackName: '',
   trackId: '',
   trackIsPlaying: false,
   playPauseTrack: '',
@@ -29,6 +30,12 @@ const shopReducer = (state, action) => {
       return {
         ...state,
         trackId: payload.trackId
+      }
+    case 'APP_TRACK_NAME':
+      //console.log('APP_TRACK_NAME', payload)
+      return {
+        ...state,
+        trackName: payload.trackName
       }
     case 'APP_TRACK_IS_PLAYING':
       //console.log('APP_TRACK_IS_PLAYING', payload)

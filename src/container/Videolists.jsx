@@ -89,7 +89,7 @@ const Videolists = () => {
   const [listTracks, setListTracks] = useState(0)
   const [activeArtist, setActiveArtist] = useState('Artist')
   const [activeTrack, setActiveTrack] = useState('Track')
-  const { playlistTrack, appTrackId, appNextTrack } = useShop()
+  const { playlistTrack, appTrackId, appTrackName, appNextTrack } = useShop()
   const { slug } = useParams()
 
   const getData = () => {
@@ -114,6 +114,10 @@ const Videolists = () => {
   const addAppTrackId = track => {
     let index = posts.findIndex(obj => obj.track === track)
     appTrackId(index >= 0 ? posts[index].video : '')
+  }
+  const addAppTrackName = track => {
+    let index = posts.findIndex(obj => obj.track === track)
+    appTrackName(index >= 0 ? posts[index].title : '')
   }
   const addAppNextTrack = track => {
     const max = posts.length
@@ -154,6 +158,7 @@ const Videolists = () => {
       setActiveArtist(getArtist(playlistTrack))
       setActiveTrack(getTrack(playlistTrack))
       addAppTrackId(playlistTrack)
+      addAppTrackName(playlistTrack)
       addAppNextTrack(playlistTrack)
     }
     // eslint-disable-next-line
@@ -166,6 +171,7 @@ const Videolists = () => {
       setActiveArtist(getArtist(playlistTrack))
       setActiveTrack(getTrack(playlistTrack))
       addAppTrackId(playlistTrack)
+      addAppTrackName(playlistTrack)
       addAppNextTrack(playlistTrack)
     }
     // eslint-disable-next-line
