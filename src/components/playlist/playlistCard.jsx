@@ -12,7 +12,7 @@ const StyledPlaylistCard = styled.article`
   position: relative;
   overflow: hidden;
   background-color: var(--jetblack);
-  background-color: ${props => (props.page === 'home' ? '#ccc' : 'var(--jetblack)')};
+  background-color: ${props => (props.page === 'home' ? '#e4e4e4' : 'var(--jetblack)')};
   box-shadow: rgba(50, 50, 93, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px;
   &.active {
     .playlist-ctrl {
@@ -140,7 +140,7 @@ const PlaylistCard = ({ ...post }) => {
               ))}
           </div>
         </div>
-        <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.playlist} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />
+        {pageView === 'home' ? <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.home} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} /> : <LazyImage src={post.card} alt={post.title} placeholder={({ imageProps, ref }) => <img ref={ref} src={images.playlist} alt={imageProps.alt} />} actual={({ imageProps }) => <img {...imageProps} alt={post.title} />} />}
       </Link>
     </StyledPlaylistCard>
   )

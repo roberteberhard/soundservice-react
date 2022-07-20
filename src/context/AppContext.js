@@ -75,6 +75,15 @@ export const AppProvider = ({ children }) => {
       }
     })
   }
+  /* Toggle attach to bottom video view state */
+  const appAttachToBottom = boolAttachToBottom => {
+    dispatch({
+      type: 'APP_ATTACH_TO_BOTTOM',
+      payload: {
+        attachToBottom: boolAttachToBottom
+      }
+    })
+  }
 
   /* Add page locations to view  */
   const appPageView = strPageView => {
@@ -94,6 +103,7 @@ export const AppProvider = ({ children }) => {
     trackIsPlaying: state.trackIsPlaying,
     playPauseTrack: state.playPauseTrack,
     nextTrack: state.nextTrack,
+    attachToBottom: state.attachToBottom,
     pageView: state.pageView,
     appPlaylistSlug,
     appPlaylistTrack,
@@ -102,6 +112,7 @@ export const AppProvider = ({ children }) => {
     appTrackIsPlaying,
     appPlayPauseTrack,
     appNextTrack,
+    appAttachToBottom,
     appPageView
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

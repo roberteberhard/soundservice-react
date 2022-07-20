@@ -6,6 +6,7 @@ export const initialState = {
   trackIsPlaying: false,
   playPauseTrack: '',
   nextTrack: '',
+  attachToBottom: false,
   pageView: ''
 }
 
@@ -55,6 +56,13 @@ const shopReducer = (state, action) => {
         ...state,
         nextTrack: payload.nextTrack
       }
+    case 'APP_ATTACH_TO_BOTTOM':
+      //console.log('APP_ATTACH_TO_BOTTOM', payload)
+      return {
+        ...state,
+        attachToBottom: payload.attachToBottom
+      }
+
     case 'APP_PAGE_VIEW':
       //console.log('APP_PAGE_VIEW', payload)
       return {

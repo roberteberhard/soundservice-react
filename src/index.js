@@ -6,6 +6,8 @@ import { GlobalStyle, theme } from './styles'
 import { AppProvider } from './context/AppContext'
 import { Player } from './container'
 
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+
 // pages & routes
 import { Home, Track, Privacy, Legal, Error } from './pages'
 
@@ -32,3 +34,5 @@ const Index = () => {
 const container = document.getElementById('root')
 const root = createRoot(container)
 root.render(<Index />)
+
+serviceWorkerRegistration.register();

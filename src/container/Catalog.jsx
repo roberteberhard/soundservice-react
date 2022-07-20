@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useShop from '../context/AppContext'
+import { useInView } from 'react-cool-inview'
 import { useNavigate } from 'react-router-dom'
 import { images } from '../constants'
 import Wave from '../assets/svgs/wave.svg'
@@ -133,7 +134,20 @@ const StyledPlayerNavi = styled.nav`
 
 // markup
 const Catalog = () => {
-  const { playlistSlug, playlistTrack, trackIsPlaying, nextTrack, appPlayPauseTrack } = useShop()
+  const { playlistSlug, playlistTrack, trackIsPlaying, nextTrack, appPlayPauseTrack, appAttachToBottom } = useShop()
+  const { observe } = useInView({
+    threshold: 0.25,
+    onEnter: ({ scrollDirection, entry, observe, unobserve }) => {
+      if (playlistSlug.length > 1) {
+        appAttachToBottom(false)
+      }
+    },
+    onLeave: ({ scrollDirection, entry, observe, unobserve }) => {
+      if (playlistSlug.length > 1) {
+        appAttachToBottom(true)
+      }
+    }
+  })
   const navigate = useNavigate()
 
   const onPlayClick = () => {
@@ -148,7 +162,7 @@ const Catalog = () => {
 
   return (
     <StyledCatalogSection style={{ backgroundImage: `url(${Wave})` }}>
-      <StyledEmptyJesus />
+      <StyledEmptyJesus ref={observe} />
       <StyledPlayerNavi hasPlayer={playlistSlug}>
         <div className="player-controls">
           <div className="btn" onClick={() => onPlayClick()}>

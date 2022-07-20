@@ -32,7 +32,9 @@ const StyledFooterContent = styled.div`
 const StyledInnerSection = styled.div`
   padding: 40px 0 0 0;
   &.has-player {
-    border: none;
+    @media screen and (max-width: 768px) {
+      padding: 0 var(--pad-sm) 280px var(--pad-sm);
+    }
   }
 `
 

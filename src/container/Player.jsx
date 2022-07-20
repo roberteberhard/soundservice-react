@@ -16,30 +16,31 @@ const StyledOuterWrapper = styled.div`
   background-color: var(--black);
   &.player-home {
     overflow: hidden;
+    position: ${props => (props.attached ? `fixed` : `absolute`)};
     width: 420px;
     height: 236px;
     top: calc(100vh - 50px);
+    top: ${props => (props.attached ? `calc(100vh - 286px)` : `calc(100vh - 50px)`)};
     left: calc(100% - 470px);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
     @media screen and (max-width: 1080px) {
       left: calc(100% - 460px);
     }
     @media screen and (max-width: 768px) {
-      top: calc(100vh + 95px);
+      top: ${props => (props.attached ? `calc(100vh - 276px)` : `calc(100vh + 95px)`)};
       left: calc((100% - 420px) * 0.5);
     }
     @media screen and (max-width: 420px) {
-      top: calc(100vh + 95px);
+      top: ${props => (props.attached ? `calc(100vh - 261px)` : `calc(100vh + 95px)`)};
       left: 0;
       width: 100%;
     }
     @media screen and (min-height: 990px) {
-      top: calc(990px - 236px);
-      border: 2px solid red;
+      top: ${props => (props.attached ? `calc(100vh - 276px)` : `calc(990px - 236px)`)};
     }
     @media screen and (max-width: 1080px) and (min-height: 990px) {
-      top: calc(990px - 241px);
-      border: 2px solid yellow;
+      top: ${props => (props.attached ? `calc(100vh - 276px)` : `calc(990px - 241px)`)};
     }
   }
   &.player-privacy,
@@ -134,7 +135,7 @@ const Player = () => {
   const [videoId, setVideoId] = useState('')
   const [positions, setPositions] = useState({ x: 0, y: 0 })
   const [dimensions, setDimensions] = useState({ height: window.innerHeight, width: window.innerWidth })
-  const { playlistSlug, trackId, nextTrack, trackIsPlaying, playPauseTrack, pageView, appTrackIsPlaying } = useShop()
+  const { playlistSlug, trackId, nextTrack, trackIsPlaying, playPauseTrack, attachToBottom, pageView, appTrackIsPlaying } = useShop()
   const refPlayer = useRef(null)
   const navigate = useNavigate()
 
@@ -226,7 +227,7 @@ const Player = () => {
   }, [playPauseTrack])
 
   return (
-    <StyledOuterWrapper hasPlayer={playlistSlug} className={`player-${pageView}`} dimensions={dimensions}>
+    <StyledOuterWrapper hasPlayer={playlistSlug} className={`player-${pageView}`} dimensions={dimensions} attached={attachToBottom}>
       <StyledInnerWrapper pageView={pageView} positions={positions} dimensions={dimensions}>
         <StyledRemoteControl dimensions={dimensions}>
           {trackIsPlaying ? (
